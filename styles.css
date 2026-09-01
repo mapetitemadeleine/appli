@@ -1,0 +1,7 @@
+/* Ma petite madeleine — global stylesheet entry point.
+   List @imports only; add new token files here as the system grows. */
+
+@import url('./tokens/fonts.css');
+@import url('./tokens/colors.css');
+@import url('./tokens/typography.css');
+@import url('./tokens/spacing.css');

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>Ma petite madeleine — French Class</title>
+<meta name="description" content="Un exercice de français par jour, avec le saint du jour.">
+<meta name="theme-color" content="#FBF6EC">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Madeleine">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
+<link rel="icon" href="assets/app-icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+html,body{margin:0;height:100%;overscroll-behavior:none}
+body{background:#FBF6EC;font-family:'EB Garamond',Georgia,serif;font-weight:500;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+#root{position:fixed;inset:0;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:#FBF6EC;box-sizing:border-box}
+#root>div{height:100%}
+a{color:#8F6518}a:hover{color:#B8862B}
+button{font-weight:500;font-family:inherit}
+#root ::-webkit-scrollbar{width:0;height:0}
+@media (min-width:620px){body{background:#EFE7D6}#root{right:auto;left:50%;width:440px;margin-left:-220px;border-left:1px solid #E6D9BC;border-right:1px solid #E6D9BC}}
+#demarrage{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#FBF6EC;z-index:99;transition:opacity .4s}
+#demarrage img{width:158px;height:158px}
+#demarrage .n{font-family:'Cormorant Garamond',Georgia,serif;font-size:27px;color:#1C2B4F}
+#demarrage .f{font-size:19px;color:#B8862B}
+#ajout{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:98;background:#1C2B4F;color:#FBF6EC;border-radius:14px;padding:14px 16px;display:none;gap:12px;align-items:center;font-size:16px;line-height:1.4;box-shadow:0 10px 30px rgba(28,43,79,.28)}
+#ajout b{color:#D9AE5C;font-weight:600}
+#ajout button{margin-left:auto;flex:none;background:none;border:1px solid rgba(251,246,236,.4);color:#FBF6EC;border-radius:9px;padding:7px 12px;font-size:15px}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="app/exercices.js"></script>
+<script src="_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<div id="demarrage"><img src="assets/logo/madeleine-logo-transparent.png" alt=""><div class="n">Ma petite madeleine</div><div class="f">⚜</div></div>
+<div id="ajout"><span>Pour la garder sous la main&nbsp;: <b>Partager</b> puis <b>Sur l'écran d'accueil</b>.</span><button type="button" id="ajout-ok">Compris</button></div>
+<script type="text/babel" src="app/mpm-app.jsx"></script>
+<script type="text/babel">
+ReactDOM.createRoot(document.getElementById('root')).render(<window.App />);
+const voile = document.getElementById('demarrage');
+setTimeout(()=>{ voile.style.opacity = 0; setTimeout(()=>voile.remove(), 450); }, 700);
+const autonome = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+if (iOS && !autonome && !localStorage.getItem('mpm-ajout-vu')) {
+  setTimeout(()=>{ document.getElementById('ajout').style.display = 'flex'; }, 2600);
+}
+document.getElementById('ajout-ok').onclick = () => { localStorage.setItem('mpm-ajout-vu','1'); document.getElementById('ajout').style.display = 'none'; };
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  addEventListener('load', async () => {
+    try {
+      const reg = await navigator.serviceWorker.register('sw.js');
+      let recharge = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => { if (!recharge) { recharge = true; location.reload(); } });
+      const attendre = w => w && w.addEventListener('statechange', () => { if (w.state === 'installed' && navigator.serviceWorker.controller) w.postMessage('maintenant'); });
+      attendre(reg.waiting); attendre(reg.installing);
+      reg.addEventListener('updatefound', () => attendre(reg.installing));
+      setInterval(() => reg.update().catch(()=>{}), 60 * 60 * 1000);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update().catch(()=>{}); });
+    } catch(e){}
+  });
+}
+</script>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#1C2B4F"></rect><text x="50" y="62" font-family="Georgia, serif" font-size="44" fill="#D9AE5C" text-anchor="middle">⚜</text></svg>
+</template>
+</body>
+</html>

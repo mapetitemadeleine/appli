@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Ma petite madeleine — Webfonts
+   No brand font files were supplied. Nearest Google Fonts matches for a
+   refined, revisited-18th-century voice:
+     - Cormorant Garamond — display serif. High-contrast, engraved letterforms
+       close to the logo's "French" wordmark and gold italic "Class" script.
+     - EB Garamond — body serif. A period-accurate Garamond revival, calm and
+       legible at small sizes for exercises and paragraphs.
+   FLAG: substitution, not the brand's real typeface. If Marguerite has an
+   original font (e.g. from a print piece or the château branding), share the
+   files and this can be swapped for a true @font-face.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');

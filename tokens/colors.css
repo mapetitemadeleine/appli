@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Ma petite madeleine — Color tokens
+   Sampled from the brand mark (assets/logo/madeleine-logo.png): a deep
+   French navy ring/wordmark, a warm madeleine gold, and an ivory ground.
+   Sage and bordeaux are intentional additions — see readme.md.
+   ========================================================================== */
+
+:root {
+  /* ---- Base palette -------------------------------------------------- */
+  --madeleine-navy-900: #141F3A;
+  --madeleine-navy-700: #1C2B4F;   /* primary ink — sampled from logo ring/wordmark */
+  --madeleine-navy-500: #38507C;   /* softened navy for secondary text, icons */
+  --madeleine-navy-300: #7C8CAE;   /* muted navy, disabled/placeholder text */
+  --madeleine-navy-100: #DCE2ED;   /* pale navy tint for hairlines on white */
+
+  --madeleine-gold-700: #8F6518;   /* deep gold — pressed state, small text on ivory */
+  --madeleine-gold-500: #B8862B;   /* primary gold accent — sampled from madeleine shell */
+  --madeleine-gold-300: #D9AE5C;   /* lighter gold — hover, ornament strokes */
+  --madeleine-gold-100: #F3E4C0;   /* pale gold wash — badge/highlight backgrounds */
+
+  --madeleine-ivory-100: #FBF6EC;  /* page ground — sampled from logo background */
+  --madeleine-ivory-200: #F4EBD8;  /* warm ivory — card surfaces, alternating sections */
+  --madeleine-cream-line: #E6D9BC; /* hairline borders/rules on ivory */
+
+  --madeleine-sage-700: #5B6A4C;   /* deep sage — text on sage fills */
+  --madeleine-sage-500: #7C8A6C;   /* jardin-à-la-française green — success/correct */
+  --madeleine-sage-100: #E7ECDF;  /* pale sage wash */
+
+  --madeleine-bordeaux-700: #5A2020; /* deep bordeaux — text on bordeaux fills */
+  --madeleine-bordeaux-500: #7A2E2E; /* wine accent — error/incorrect, used sparingly */
+  --madeleine-bordeaux-100: #F1DEDC; /* pale bordeaux wash */
+
+  --madeleine-white: #FFFFFF;
+
+  /* ---- Semantic aliases ----------------------------------------------- */
+  --color-bg: var(--madeleine-ivory-100);
+  --color-bg-alt: var(--madeleine-ivory-200);
+  --color-surface: var(--madeleine-white);
+  --color-surface-alt: var(--madeleine-ivory-200);
+  --color-surface-navy: var(--madeleine-navy-700);
+
+  --color-border: var(--madeleine-cream-line);
+  --color-border-strong: var(--madeleine-navy-700);
+  --color-border-gold: var(--madeleine-gold-500);
+
+  --color-text-primary: var(--madeleine-navy-700);
+  --color-text-secondary: var(--madeleine-navy-500);
+  --color-text-muted: var(--madeleine-navy-300);
+  --color-text-on-navy: var(--madeleine-ivory-100);
+  --color-text-on-gold: var(--madeleine-navy-900);
+
+  --color-accent: var(--madeleine-gold-500);
+  --color-accent-hover: var(--madeleine-gold-700);
+  --color-accent-bg: var(--madeleine-gold-100);
+
+  --color-link: var(--madeleine-gold-700);
+  --color-link-hover: var(--madeleine-navy-700);
+
+  --color-success: var(--madeleine-sage-500);
+  --color-success-text: var(--madeleine-sage-700);
+  --color-success-bg: var(--madeleine-sage-100);
+
+  --color-error: var(--madeleine-bordeaux-500);
+  --color-error-text: var(--madeleine-bordeaux-700);
+  --color-error-bg: var(--madeleine-bordeaux-100);
+
+  --color-focus-ring: var(--madeleine-gold-500);
+}

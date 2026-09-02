@@ -140,7 +140,7 @@ window.MPM_EXERCICES = [
   },
   {
     id: "progression-anne", date: "2026-07-28", saint: "Sainte Anne", niveau: "b1",
-    theme: "Grammaire", titre: "De A1 à C2, marche par marche",
+    theme: "Révision", titre: "De A1 à C2, marche par marche",
     accroche: "Six niveaux, six questions : jusqu'où irez-vous ?",
     items: [
       { type: "choix", enonce: "A1 — Sophie est la fille de mon oncle. C'est ma ___ préférée.", options: ["sœur", "cousine", "tante"], reponse: 1, note: "La fille de l'oncle est la cousine." },
@@ -308,7 +308,7 @@ window.MPM_EXERCICES = [
   },
   {
     id: "liaisons-hippolyte", date: "2026-08-13", saint: "Saint Hippolyte", niveau: "b1",
-    theme: "Orthographe", titre: "Les liaisons et le H",
+    theme: "Prononciation", titre: "Les liaisons et le H",
     accroche: "H muet ou H aspiré : la lettre ne se prononce jamais, mais elle change tout.",
     items: [
       { type: "ecoute", enonce: "La liaison se fait-elle ?", audio: "Les enfants du cocher jouaient dans la cour.", options: ["Oui, obligatoire", "Non, interdite"], reponse: 0, note: "Déterminant + nom : liaison obligatoire." },
@@ -445,13 +445,50 @@ window.MPM_EXERCICES = [
       { type: "ecoute", enonce: "Écoutez, puis écrivez le pronom entendu.", audio: "C'est le miroir à propos duquel je vous écrivais hier.", reponse: ["duquel"], note: "à propos de + lequel = à propos duquel." }
     ],
     histoire: "Gilles vint d'Orient et choisit de vivre seul dans une forêt près du Rhône. Une biche venait lui donner son lait. Le roi, chassant dans ce bois, la blessa d'une flèche ; plein de regret, il fit bâtir un monastère : la ville de Saint-Gilles, dans le Gard."
+  },
+  {
+    id: "pierres-just", date: "2026-09-02", saint: "Saint Just", niveau: "b1",
+    theme: "Vocabulaire", titre: "Les pierres précieuses",
+    accroche: "De la mine à la vitrine : les pierres, l'or, les bijoux.",
+    items: [
+      { type: "image", enonce: "On la porte au doigt.", image: "img/8.png", reponse: ["une bague", "la bague", "bague"], note: "Une bague. L'anneau, c'est le cercle de métal." },
+      { type: "image", enonce: "Il se ferme derrière le cou.", image: "img/9.png", reponse: ["un collier", "le collier", "collier"], note: "Un collier." },
+      { type: "image", enonce: "Elle se pose sur la tête.", image: "img/10.png", reponse: ["une couronne", "la couronne", "couronne"], note: "Une couronne." },
+      { type: "image", enonce: "Elles se portent aux oreilles.", image: "img/11.png", reponse: ["des boucles d'oreilles", "les boucles d'oreilles", "boucles d'oreilles"], note: "Des boucles d'oreilles — toujours au pluriel, comme les lunettes." },
+      { type: "saisie", enonce: "Elle est verte et vient de Colombie : une ___", reponse: ["émeraude", "une émeraude"], note: "Une émeraude." },
+      { type: "choix", enonce: "Le morceau d'or brut ramassé dans la rivière :", options: ["un filon", "une pépite", "un tamis"], reponse: 1, note: "La pépite se ramasse ; le filon se creuse ; le tamis lave le sable." },
+      { type: "saisie", enonce: "Le long couloir souterrain de la mine : une ___", reponse: ["galerie", "une galerie"], note: "Une galerie." },
+      { type: "choix", enonce: "« Sertir » une pierre, c'est :", options: ["la fixer dans le métal", "la polir", "l'estimer"], reponse: 0, note: "On taille, on sertit, on polit, puis on grave." },
+      { type: "ecoute", enonce: "Écoutez et écrivez le nom de la pierre.", audio: "Ce saphir de Ceylan vaut une fortune.", reponse: ["saphir", "un saphir", "le saphir"], note: "Un saphir, bleu comme le ciel du soir." }
+    ],
+    histoire: "Just vivait à Lyon, ville de marchands et d'ateliers. Il préféra la vie simple aux honneurs et partit vers l'Égypte, où il vécut au désert. Lyon devint plus tard la ville des soyeux et des orfèvres."
   }
 ];
 
+/* Sujet réel de chaque question, lorsqu'il diffère du thème du billet.
+   Clés : identifiant du billet → numéro de la question (à partir de 0) → sujet. */
+var MPM_SUJETS = {
+  "progression-anne":  { 0:"Vocabulaire", 1:"Orthographe", 2:"Conjugaison", 3:"Conjugaison", 4:"Conjugaison", 5:"Vocabulaire" },
+  "plage-laurent":     { 0:"Vocabulaire", 1:"Vocabulaire", 2:"Conjugaison", 4:"Conjugaison", 6:"Conjugaison" },
+  "jardin-hyacinthe":  { 4:"Orthographe", 5:"Conjugaison" },
+  "rentree-sulpice":   { 3:"Grammaire", 4:"Grammaire", 5:"Conjugaison", 6:"Conjugaison" },
+  "vocabulaire-anaclet": { 5:"Vocabulaire" },
+  "orthographe-marthe": { 7:"Orthographe" },
+  "geographie-cyriaque": { 1:"Orthographe", 5:"Orthographe" },
+  "dialogue-marguerite": { 3:"Vocabulaire" },
+  "caniculaires":      { 5:"Vocabulaire" },
+  "varie-abdon":       { 4:"Compréhension", 5:"Compréhension", 6:"Compréhension" },
+  "subjonctif-madeleine": { 5:"Grammaire", 6:"Grammaire" },
+  "conjugaison-assomption": { 3:"Conjugaison", 4:"Conjugaison", 5:"Conjugaison" },
+  "liaisons-hippolyte": { 2:"Orthographe", 3:"Orthographe", 4:"Orthographe", 5:"Orthographe" },
+  "marche-dominique":  { 5:"Compréhension" }
+};
+
 /* Enregistrements de la voix : app/audio/<id>-<n>.wav quand le fichier existe. */
 window.MPM_EXERCICES.forEach(function(b){
-  var n = 0;
-  b.items.forEach(function(it){
+  var n = 0, sujets = MPM_SUJETS[b.id] || {};
+  b.items.forEach(function(it, i){
+    it.sujet = sujets[i] || b.theme;
     if (it.type === 'ecoute') { n++; it.src = 'app/audio/' + b.id + '-' + n + '.wav'; }
   });
 });

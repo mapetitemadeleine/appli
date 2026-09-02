@@ -146,7 +146,7 @@ function Question({ item, index, total, onSuivant }){
   const pret = aOptions ? choix !== null : saisie.trim().length > 0;
 
   return (
-    <div style={{ padding:'16px 18px 24px', display:'flex', flexDirection:'column', minHeight:'100%', boxSizing:'border-box' }}>
+    <div style={{ padding:'16px 18px 28px', display:'flex', flexDirection:'column', boxSizing:'border-box' }}>
       <div style={{ display:'flex', gap:5, marginBottom:20 }}>
         {Array.from({length:total}).map((_,i)=>(
           <div key={i} style={{ flex:1, height:3, borderRadius:3, background: i<index ? OR5 : i===index ? NAVY3 : '#E4DAC6' }} />
@@ -198,8 +198,14 @@ function Question({ item, index, total, onSuivant }){
             border:'1.5px solid '+(valide ? (juste ? '#3E8B62' : '#B96A6A') : OR3), background: valide ? (juste ? '#EAF3ED' : '#F8EDEA') : '#FFFFFF', outline:'none' }} />
       )}
 
+      <div style={{ marginTop:16 }}>
+        <Bouton disabled={!pret} onClick={()=>{ if(!valide) setValide(true); else onSuivant(juste); }}>
+          {valide ? (index+1 === total ? 'Voir le résultat' : 'Question suivante') : 'Vérifier'}
+        </Bouton>
+      </div>
+
       {valide && (
-        <div style={{ marginTop:18, background:'#EAEFF6', border:'1px solid #C9D6E8', borderRadius:12, padding:'15px 17px' }}>
+        <div style={{ marginTop:16, background:'#EAEFF6', border:'1px solid #C9D6E8', borderRadius:12, padding:'15px 17px' }}>
           <div style={{ fontFamily:BODY, fontSize:12, letterSpacing:'0.14em', textTransform:'uppercase', color:OR7, marginBottom:6 }}>
             {juste ? 'C\u2019est juste' : 'La réponse'}
           </div>
@@ -208,10 +214,6 @@ function Question({ item, index, total, onSuivant }){
         </div>
       )}
 
-      <div style={{ flex:1, minHeight:20 }} />
-      <Bouton disabled={!pret} onClick={()=>{ if(!valide) setValide(true); else onSuivant(juste); }}>
-        {valide ? (index+1 === total ? 'Voir le résultat' : 'Question suivante') : 'Vérifier'}
-      </Bouton>
     </div>
   );
 }
@@ -393,7 +395,7 @@ function App(){
       const pos = c.findIndex(x=>x.cle===cle);
       if (juste){ if (pos > -1) c.splice(pos, 1); }
       else if (pos > -1) c[pos] = { ...c[pos], fois: (c[pos].fois||1)+1 };
-      else c.push({ cle, item, theme: exo ? exo.theme : 'Révision', fois: 1 });
+      else c.push({ cle, item, theme: item.sujet || (exo ? exo.theme : 'Révision'), fois: 1 });
       return { ...s, carnet: c };
     });
     const score = session.score + (juste?1:0);

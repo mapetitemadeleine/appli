@@ -445,6 +445,23 @@ window.MPM_EXERCICES = [
       { type: "ecoute", enonce: "Écoutez, puis écrivez le pronom entendu.", audio: "C'est le miroir à propos duquel je vous écrivais hier.", reponse: ["duquel"], note: "à propos de + lequel = à propos duquel." }
     ],
     histoire: "Gilles vint d'Orient et choisit de vivre seul dans une forêt près du Rhône. Une biche venait lui donner son lait. Le roi, chassant dans ce bois, la blessa d'une flèche ; plein de regret, il fit bâtir un monastère : la ville de Saint-Gilles, dans le Gard."
+  },
+  {
+    id: "pierres-just", date: "2026-09-02", saint: "Saint Just", niveau: "b1",
+    theme: "Vocabulaire", titre: "Les pierres précieuses",
+    accroche: "De la mine à la vitrine : les pierres, l'or, les bijoux.",
+    items: [
+      { type: "image", enonce: "On la porte au doigt.", image: "img/8.png", reponse: ["une bague", "la bague", "bague"], note: "Une bague. L'anneau, c'est le cercle de métal." },
+      { type: "image", enonce: "Il se ferme derrière le cou.", image: "img/9.png", reponse: ["un collier", "le collier", "collier"], note: "Un collier." },
+      { type: "image", enonce: "Elle se pose sur la tête.", image: "img/10.png", reponse: ["une couronne", "la couronne", "couronne"], note: "Une couronne." },
+      { type: "image", enonce: "Elles se portent aux oreilles.", image: "img/11.png", reponse: ["des boucles d'oreilles", "les boucles d'oreilles", "boucles d'oreilles"], note: "Des boucles d'oreilles — toujours au pluriel, comme les lunettes." },
+      { type: "saisie", enonce: "Elle est verte et vient de Colombie : une ___", reponse: ["émeraude", "une émeraude"], note: "Une émeraude." },
+      { type: "choix", enonce: "Le morceau d'or brut ramassé dans la rivière :", options: ["un filon", "une pépite", "un tamis"], reponse: 1, note: "La pépite se ramasse ; le filon se creuse ; le tamis lave le sable." },
+      { type: "saisie", enonce: "Le long couloir souterrain de la mine : une ___", reponse: ["galerie", "une galerie"], note: "Une galerie." },
+      { type: "choix", enonce: "« Sertir » une pierre, c'est :", options: ["la fixer dans le métal", "la polir", "l'estimer"], reponse: 0, note: "On taille, on sertit, on polit, puis on grave." },
+      { type: "ecoute", enonce: "Écoutez et écrivez le nom de la pierre.", audio: "Ce saphir de Ceylan vaut une fortune.", reponse: ["saphir", "un saphir", "le saphir"], note: "Un saphir, bleu comme le ciel du soir." }
+    ],
+    histoire: "Just vivait à Lyon, ville de marchands et d'ateliers. Il préféra la vie simple aux honneurs et partit vers l'Égypte, où il vécut au désert. Lyon devint plus tard la ville des soyeux et des orfèvres."
   }
 ];
 

@@ -14,25 +14,17 @@ const store = {
 };
 
 let audioCourant = null;
-// Voix française pré-chargée (Chrome Android charge les voix de façon asynchrone)
-let _voixFR = null;
-function _chargerVoix(){
-  const v = speechSynthesis.getVoices().find(x => x.lang && x.lang.indexOf('fr') === 0);
-  if (v) _voixFR = v;
-}
-try { speechSynthesis.onvoiceschanged = _chargerVoix; _chargerVoix(); } catch(e){}
-
 function dire(item){
   const texte = typeof item === 'string' ? item : item.audio;
   const src = typeof item === 'object' && item.src;
   try { speechSynthesis.cancel(); } catch(e){}
   if (audioCourant) { audioCourant.pause(); audioCourant = null; }
   if (src) {
-    // Vérifier l'existence du fichier via HEAD pour rester dans le contexte
-    // du geste utilisateur lors du fallback TTS (pas de Promise imbriquée).
-    fetch(src, { method: 'HEAD' })
-      .then(r => { if (r.ok) { const a = new Audio(src); audioCourant = a; a.play().catch(()=>{ if(audioCourant===a){audioCourant=null;synth(texte);} }); a.onerror=()=>{ if(audioCourant===a){audioCourant=null;synth(texte);} }; } else synth(texte); })
-      .catch(() => synth(texte));
+    const a = new Audio(src);
+    audioCourant = a;
+    const p = a.play();
+    if (p && p.catch) p.catch(()=>{ if (audioCourant === a) { audioCourant = null; synth(texte); } });
+    a.onerror = () => { if (audioCourant === a) { audioCourant = null; synth(texte); } };
     return;
   }
   synth(texte);
@@ -42,7 +34,7 @@ function synth(texte){
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(texte);
     u.lang = 'fr-FR'; u.rate = 0.85;
-    const v = _voixFR || speechSynthesis.getVoices().find(x => x.lang && x.lang.indexOf('fr') === 0);
+    const v = speechSynthesis.getVoices().find(x => x.lang && x.lang.indexOf('fr') === 0);
     if (v) u.voice = v;
     speechSynthesis.speak(u);
   } catch(e){}
@@ -142,16 +134,14 @@ function Accueil({ ex, etat, onCommencer, onHasard, faitAujourdhui }){
 /* ————— Exercice ————— */
 function Question({ item, index, total, onSuivant }){
   const [choix, setChoix] = useState(null);
-  const [saisie, setSaisie] = useState('');
   const [valide, setValide] = useState(false);
-  const aOptions = !!item.options;
   const joue = useRef(false);
 
-  useEffect(() => { setChoix(null); setSaisie(''); setValide(false); joue.current = false; }, [index]);
+  useEffect(() => { setChoix(null); setValide(false); joue.current = false; }, [index]);
   useEffect(() => { if (item.type === 'ecoute' && !joue.current) { joue.current = true; const t = setTimeout(()=>dire(item), 420); return ()=>clearTimeout(t); } }, [index]);
 
-  const juste = aOptions ? choix === item.reponse : item.reponse.some(r => norm(r) === norm(saisie));
-  const pret = aOptions ? choix !== null : saisie.trim().length > 0;
+  const juste = choix === item.reponse;
+  const pret = choix !== null;
 
   return (
     <div style={{ padding:'16px 18px 28px', display:'flex', flexDirection:'column', boxSizing:'border-box' }}>
@@ -181,30 +171,21 @@ function Question({ item, index, total, onSuivant }){
 
       <div style={{ fontFamily:SERIF, fontWeight:600, fontSize:26, lineHeight:1.3, color:NAVY, textAlign:'center', marginBottom:22, textWrap:'pretty' }}>{item.enonce}</div>
 
-      {aOptions ? (
-        <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
-          {item.options.map((o,i) => {
+      <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+        {(item.options || []).map((o,i) => {
             const sel = choix === i;
             const bon = valide && i === item.reponse;
             const faux = valide && sel && i !== item.reponse;
             return (
-              <button key={i} disabled={valide} onClick={()=>setChoix(i)} style={{
-                textAlign:'left', padding:'15px 18px', borderRadius:13, cursor: valide?'default':'pointer',
-                fontFamily:BODY, fontSize:19, color: bon ? '#1E5B3A' : faux ? '#8C2F2F' : NAVY,
-                border:'1.5px solid '+(bon ? '#3E8B62' : faux ? '#B96A6A' : sel ? OR5 : LINE),
-                background: bon ? '#EAF3ED' : faux ? '#F8EDEA' : sel ? OR1 : '#FFFFFF'
-              }}>{o}</button>
-            );
-          })}
-        </div>
-      ) : (
-        <input value={saisie} disabled={valide} onChange={e=>setSaisie(e.target.value)}
-          onKeyDown={e=>{ if(e.key==='Enter' && pret && !valide) setValide(true); }}
-          placeholder="Votre réponse" autoComplete="off" autoCapitalize="off" spellCheck="false"
-          style={{ width:'100%', boxSizing:'border-box', padding:'15px 18px', borderRadius:13, fontFamily:BODY, fontSize:20,
-            color: valide ? (juste ? '#1E5B3A' : '#8C2F2F') : NAVY, textAlign:'center',
-            border:'1.5px solid '+(valide ? (juste ? '#3E8B62' : '#B96A6A') : OR3), background: valide ? (juste ? '#EAF3ED' : '#F8EDEA') : '#FFFFFF', outline:'none' }} />
-      )}
+            <button key={i} disabled={valide} onClick={()=>setChoix(i)} style={{
+              textAlign:'left', padding:'17px 18px', minHeight:56, borderRadius:13, cursor: valide?'default':'pointer',
+              fontFamily:BODY, fontSize:19, color: bon ? '#1E5B3A' : faux ? '#8C2F2F' : NAVY,
+              border:'1.5px solid '+(bon ? '#3E8B62' : faux ? '#B96A6A' : sel ? OR5 : LINE),
+              background: bon ? '#EAF3ED' : faux ? '#F8EDEA' : sel ? OR1 : '#FFFFFF'
+            }}>{o}</button>
+          );
+        })}
+      </div>
 
       <div style={{ marginTop:16 }}>
         <Bouton disabled={!pret} onClick={()=>{ if(!valide) setValide(true); else onSuivant(juste); }}>
@@ -217,7 +198,7 @@ function Question({ item, index, total, onSuivant }){
           <div style={{ fontFamily:BODY, fontSize:12, letterSpacing:'0.14em', textTransform:'uppercase', color:OR7, marginBottom:6 }}>
             {juste ? 'C\u2019est juste' : 'La réponse'}
           </div>
-          {!juste && <div style={{ fontFamily:SERIF, fontWeight:600, fontSize:22, color:NAVY, marginBottom:6 }}>{aOptions ? item.options[item.reponse] : item.reponse[0]}</div>}
+          {!juste && <div style={{ fontFamily:SERIF, fontWeight:600, fontSize:22, color:NAVY, marginBottom:6 }}>{item.options[item.reponse]}</div>}
           <div style={{ fontFamily:BODY, fontSize:17, lineHeight:1.5, color:NAVY, textWrap:'pretty' }}>{item.note}</div>
         </div>
       )}
@@ -309,7 +290,7 @@ function Carnet({ carnet, onReviser, onAujourdhui }){
             </div>
             <div style={{ fontFamily:SERIF, fontWeight:600, fontSize:20, color:NAVY, lineHeight:1.3, marginBottom:6, textWrap:'pretty' }}>{c.item.enonce}</div>
             <div style={{ fontFamily:BODY, fontSize:16, color:OR7, fontWeight:600, marginBottom:4 }}>
-              {c.item.options ? c.item.options[c.item.reponse] : c.item.reponse[0]}
+              {c.item.options[c.item.reponse]}
             </div>
             <div style={{ fontFamily:BODY, fontSize:16, lineHeight:1.5, color:NAVY5, textWrap:'pretty' }}>{c.item.note}</div>
           </div>

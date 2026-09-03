@@ -14,17 +14,25 @@ const store = {
 };
 
 let audioCourant = null;
+// Voix française pré-chargée (Chrome Android charge les voix de façon asynchrone)
+let _voixFR = null;
+function _chargerVoix(){
+  const v = speechSynthesis.getVoices().find(x => x.lang && x.lang.indexOf('fr') === 0);
+  if (v) _voixFR = v;
+}
+try { speechSynthesis.onvoiceschanged = _chargerVoix; _chargerVoix(); } catch(e){}
+
 function dire(item){
   const texte = typeof item === 'string' ? item : item.audio;
   const src = typeof item === 'object' && item.src;
   try { speechSynthesis.cancel(); } catch(e){}
   if (audioCourant) { audioCourant.pause(); audioCourant = null; }
   if (src) {
-    const a = new Audio(src);
-    audioCourant = a;
-    const p = a.play();
-    if (p && p.catch) p.catch(()=>{ if (audioCourant === a) { audioCourant = null; synth(texte); } });
-    a.onerror = () => { if (audioCourant === a) { audioCourant = null; synth(texte); } };
+    // Vérifier l'existence du fichier via HEAD pour rester dans le contexte
+    // du geste utilisateur lors du fallback TTS (pas de Promise imbriquée).
+    fetch(src, { method: 'HEAD' })
+      .then(r => { if (r.ok) { const a = new Audio(src); audioCourant = a; a.play().catch(()=>{ if(audioCourant===a){audioCourant=null;synth(texte);} }); a.onerror=()=>{ if(audioCourant===a){audioCourant=null;synth(texte);} }; } else synth(texte); })
+      .catch(() => synth(texte));
     return;
   }
   synth(texte);
@@ -34,7 +42,7 @@ function synth(texte){
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(texte);
     u.lang = 'fr-FR'; u.rate = 0.85;
-    const v = speechSynthesis.getVoices().find(x => x.lang && x.lang.indexOf('fr') === 0);
+    const v = _voixFR || speechSynthesis.getVoices().find(x => x.lang && x.lang.indexOf('fr') === 0);
     if (v) u.voice = v;
     speechSynthesis.speak(u);
   } catch(e){}

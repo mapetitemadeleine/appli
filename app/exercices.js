@@ -484,11 +484,23 @@ var MPM_SUJETS = {
   "marche-dominique":  { 5:"Compréhension" }
 };
 
-/* Enregistrements de la voix : app/audio/<id>-<n>.wav quand le fichier existe. */
+/* Enregistrements de la voix : listez ici les fichiers réellement disponibles.
+   Format : '<id>-<n>' (ex: 'pierres-just-1'). Tant qu'un fichier n'est pas
+   uploadé dans app/audio/, ne l'ajoutez pas — la voix de synthèse prend le relais. */
+var MPM_AUDIO_DISPONIBLES = [
+  // ex: 'pierres-just-1', 'pierres-just-2'
+];
+
 window.MPM_EXERCICES.forEach(function(b){
   var n = 0, sujets = MPM_SUJETS[b.id] || {};
   b.items.forEach(function(it, i){
     it.sujet = sujets[i] || b.theme;
-    if (it.type === 'ecoute') { n++; it.src = 'app/audio/' + b.id + '-' + n + '.wav'; }
+    if (it.type === 'ecoute') {
+      n++;
+      var cle = b.id + '-' + n;
+      if (MPM_AUDIO_DISPONIBLES.indexOf(cle) !== -1) {
+        it.src = 'app/audio/' + cle + '.wav';
+      }
+    }
   });
 });

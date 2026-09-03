@@ -1,4 +1,4 @@
-const CACHE = 'mpm-v6';
+const CACHE = 'mpm-v7';
 const SHELL = [
   './index.html','./styles.css','./_ds_bundle.js','./manifest.webmanifest',
   './app/exercices.js','./app/mpm-app.jsx',
@@ -13,7 +13,7 @@ const SHELL = [
 const FRAIS = /(index\.html|exercices\.js|mpm-app\.jsx|styles\.css|_ds_bundle\.js|\/$)/;
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => Promise.allSettled(SHELL.map(u => c.add(u)))).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c => Promise.allSettled(SHELL.map(u => c.add(new Request(u, { cache: 'reload' }))))).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
@@ -28,7 +28,7 @@ self.addEventListener('fetch', e => {
   if (memeSite && FRAIS.test(new URL(req.url).pathname)) {
     // réseau d'abord, cache en secours (hors ligne)
     e.respondWith(
-      fetch(req).then(r => {
+      fetch(new Request(req.url, { cache: 'reload' })).then(r => {
         if (r && r.ok) { const copie = r.clone(); caches.open(CACHE).then(c => c.put(req, copie)); }
         return r;
       }).catch(() => caches.match(req).then(hit => hit || caches.match('./index.html')))

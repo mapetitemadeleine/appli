@@ -1,4 +1,4 @@
-const CACHE = 'mpm-v10';
+const CACHE = 'mpm-v12';
 const SHELL = [
   './index.html','./styles.css','./_ds_bundle.js','./manifest.webmanifest',
   './app/exercices.js','./app/mpm-app.jsx',

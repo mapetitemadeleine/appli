@@ -479,6 +479,23 @@ window.MPM_EXERCICES = [
       { type: "ecoute", enonce: "Écoutez : quelle forme passive entendez-vous ?", audio: "Les fresques de la chapelle sont restaurées avec soin.", options: ["sont restaurées", "sont restaurés", "ont restauré"], reponse: 0, note: "Présent passif : sont + participe accordé au féminin pluriel." }
     ],
     histoire: "Rosalie naquit dans une grande famille de Palerme et choisit la solitude d'une grotte du mont Pellegrino. Quatre siècles plus tard, ses reliques y furent retrouvées, puis portées à travers la ville : Palerme la prit pour patronne et lui offre chaque été une grande fête."
+  },
+  {
+    id: "prepositions-cloud", date: "2026-09-07", saint: "Saint Cloud", niveau: "a1",
+    theme: "Grammaire", titre: "Les prépositions de lieu",
+    accroche: "À la cour des rois francs : où l'on va, où l'on est.",
+    items: [
+      { type: "choix", enonce: "Clovis est baptisé ___ Reims.", options: ["en", "à", "au"], reponse: 1, note: "Devant un nom de ville, le français dit toujours « à »." },
+      { type: "choix", enonce: "Les Francs vivent ___ Gaule.", options: ["en", "au", "à"], reponse: 0, note: "Devant un nom de pays ou de région féminin : « en »." },
+      { type: "choix", enonce: "Le jeune prince grandit ___ palais de son grand-père.", options: ["à", "en", "au"], reponse: 2, note: "Devant un nom masculin : à + le = « au »." },
+      { type: "choix", enonce: "Des cavaliers veillent ___ frontières du royaume.", options: ["aux", "à", "en"], reponse: 0, note: "Au pluriel : à + les = « aux »." },
+      { type: "choix", enonce: "Le roi est assis ___ son grand trône de bois.", options: ["dans", "sur", "sous"], reponse: 1, note: "« Sur » pose la chose au-dessus, en contact." },
+      { type: "choix", enonce: "Le chien du prince dort ___ la longue table.", options: ["sur", "sous", "entre"], reponse: 1, note: "« Sous » place la chose en dessous." },
+      { type: "choix", enonce: "Ce soir, nous dînons ___ la reine Clotilde.", options: ["dans", "à", "chez"], reponse: 2, note: "« Chez » se dit devant une personne, jamais devant un lieu." },
+      { type: "choix", enonce: "La fontaine du jardin est ___ les deux vieux arbres.", options: ["entre", "devant", "sur"], reponse: 0, note: "« Entre » demande deux choses, une de chaque côté." },
+      { type: "choix", enonce: "Aujourd'hui, une ville ___ bord de la Seine porte son nom.", options: ["en", "dans", "au"], reponse: 2, note: "L'expression se dit « au bord de » : au bord de la mer, au bord de la route." }
+    ],
+    histoire: "Cloud était le petit-fils de Clovis et de la reine Clotilde. Il grandit à la cour des rois francs, puis choisit une autre vie : il partit loin de Paris, apprit auprès d'un ermite et se fit moine. Il s'établit ensuite dans un village au bord de la Seine, où il enseignait et cultivait la terre. Ce village porte aujourd'hui son nom : Saint-Cloud."
   }
 ];
 

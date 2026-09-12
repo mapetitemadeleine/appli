@@ -1,7 +1,7 @@
-const CACHE = 'mpm-v12';
+const CACHE = 'mpm-v13';
 const SHELL = [
   './index.html','./styles.css','./_ds_bundle.js','./manifest.webmanifest',
-  './app/exercices.js','./app/mpm-app.jsx',
+  './app/exercices.js','./app/mpm-app.jsx','./app/cartes.jsx',
   './assets/logo/madeleine-logo-transparent.png',
   './assets/icons/madeleine-gold.png','./assets/icons/madeleine-blue.png',
   './assets/app-icon-192.png','./assets/app-icon-512.png','./assets/apple-touch-icon-180.png',
@@ -10,7 +10,7 @@ const SHELL = [
   'https://unpkg.com/@babel/standalone@7.29.0/babel.min.js'
 ];
 // Toujours pris sur le réseau en premier : le contenu qui change (exercices, code, page).
-const FRAIS = /(index\.html|exercices\.js|mpm-app\.jsx|styles\.css|_ds_bundle\.js|\/$)/;
+const FRAIS = /(index\.html|exercices\.js|mpm-app\.jsx|cartes\.jsx|styles\.css|_ds_bundle\.js|\/$)/;
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => Promise.allSettled(SHELL.map(u => c.add(new Request(u, { cache: 'reload' }))))).then(() => self.skipWaiting()));

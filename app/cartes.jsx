@@ -98,7 +98,9 @@
         if (p && p.catch) p.catch(() => { if (encours === a) { encours = null; essai(pistes.slice(1)); } });
       } catch (e) { secours(); }
     };
-    essai(['audio/nombres/' + n + '.mp3', 'audio/nombres/' + n + '.wav']);
+    /* Deux emplacements possibles : GitHub aplatit parfois le dossier au dépôt. */
+    essai(['audio/nombres/' + n + '.wav', 'audio/' + n + '.wav',
+           'audio/nombres/' + n + '.mp3', 'audio/' + n + '.mp3']);
   }
 
   function Medaillon({ couleur }) {

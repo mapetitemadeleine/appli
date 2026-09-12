@@ -304,6 +304,7 @@ function Carnet({ carnet, onReviser, onAujourdhui }){
 function Onglets({ actif, onChange }){
   const items = [
     { id:'accueil', label:'Aujourd\u2019hui' },
+    { id:'cartes', label:'Les cartes' },
     { id:'carnet', label:'Mon carnet' },
     { id:'progres', label:'Ma série' }
   ];
@@ -408,6 +409,9 @@ function App(){
   } else if (fin){
     entete = <EnTete titre="Mon carnet" sous="révision" />;
     corps = <FinCarnet score={fin.score} total={fin.total} restant={carnet.length} onRetour={()=>{ setFin(null); setOnglet('carnet'); }} />;
+  } else if (onglet === 'cartes'){
+    entete = <EnTete titre="Les nombres" sous="de zéro à cent" />;
+    corps = <window.Cartes />;
   } else if (onglet === 'carnet'){
     entete = <EnTete titre="Mon carnet" sous="ce qui vous résiste" />;
     corps = <Carnet carnet={carnet} onReviser={reviser} onAujourdhui={()=>setOnglet('accueil')} />;

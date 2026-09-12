@@ -1,0 +1,7 @@
+name = "appli"
+compatibility_date = "2026-09-12"
+
+# Site entièrement statique : pas de script Worker, seulement des fichiers
+# servis depuis la racine du dépôt.
+[assets]
+directory = "./"

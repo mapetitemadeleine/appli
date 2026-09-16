@@ -65,7 +65,7 @@ window.MPM_EXERCICES = [
   {
     id: "negation-victor", date: "2026-07-21", saint: "Saint Victor", niveau: "b1",
     theme: "Grammaire", titre: "La négation",
-    accroche: "Personne, rien, jamais, nulle part : la place de chaque mot.",
+    accroche: "Dire non en français, avec tous les mots du refus.",
     items: [
       { type: "choix", enonce: "Contraire : « Le directeur reçoit quelqu'un ce matin. » → Le directeur ___ ce matin.", options: ["ne reçoit personne", "ne reçoit rien", "ne reçoit pas quelqu'un"], reponse: 0, note: "Personne remplace quelqu'un, après le verbe." },
       { type: "choix", enonce: "Contraire de « Nous passons un concours au printemps. »", options: ["Nous ne passons pas un concours", "Nous ne passons aucun concours", "Nous ne passons rien"], reponse: 1, note: "Aucun se substitue à l'article." },
@@ -81,7 +81,7 @@ window.MPM_EXERCICES = [
   {
     id: "subjonctif-madeleine", date: "2026-07-22", saint: "Sainte Madeleine", niveau: "b1",
     theme: "Conjugaison", titre: "Le subjonctif présent",
-    accroche: "Après le doute et le souhait : le subjonctif.",
+    accroche: "Ce qu'on dit quand on doute, quand on souhaite, quand on a peur.",
     items: [
       { type: "choix", enonce: "Il faut que tu ___ (finir) tes devoirs avant le dîner.", options: ["finisses", "finis", "finiras"], reponse: 0, note: "Deuxième groupe : finisse, finisses, finisse…" },
       { type: "choix", enonce: "Je veux que vous ___ (être) à l'heure demain matin.", options: ["soyez", "êtes", "serez"], reponse: 0, note: "Être : que je sois, que vous soyez." },
@@ -127,7 +127,7 @@ window.MPM_EXERCICES = [
   {
     id: "comparatifs-pantaleon", date: "2026-07-27", saint: "Saint Pantaléon", niveau: "a2",
     theme: "Grammaire", titre: "Plus, moins, autant",
-    accroche: "Comparer sans se tromper de mot.",
+    accroche: "Plus grand, moins cher, aussi beau : l'art de la comparaison.",
     items: [
       { type: "choix", enonce: "Romans : 84 lecteurs. Poésie : 20. Il y a ___ lecteurs de romans que de poésie.", options: ["plus de", "moins de", "autant de"], reponse: 0, note: "Plus de… que de… devant un nom." },
       { type: "choix", enonce: "Bandes dessinées : 56. Livres pratiques : 56. Les lecteurs sont ___", options: ["plus nombreux", "aussi nombreux", "moins nombreux"], reponse: 1, note: "Aussi… que… devant un adjectif." },
@@ -140,7 +140,7 @@ window.MPM_EXERCICES = [
   },
   {
     id: "progression-anne", date: "2026-07-28", saint: "Sainte Anne", niveau: "b1",
-    theme: "Révision", titre: "De A1 à C2, marche par marche",
+    theme: "Test de niveau", titre: "De A1 à C2, marche par marche",
     accroche: "Six niveaux, six questions : jusqu'où irez-vous ?",
     items: [
       { type: "choix", enonce: "A1 — Sophie est la fille de mon oncle. C'est ma ___ préférée.", options: ["sœur", "cousine", "tante"], reponse: 1, note: "La fille de l'oncle est la cousine." },
@@ -155,7 +155,7 @@ window.MPM_EXERCICES = [
   {
     id: "orthographe-marthe", date: "2026-07-29", saint: "Sainte Marthe", niveau: "b1",
     theme: "Orthographe", titre: "Une consonne ou deux ?",
-    accroche: "Les pièges de l'œil : doubles consonnes et accents.",
+    accroche: "Les pièges de l'œil : ce qu'on croit voir, et ce qui est écrit.",
     items: [
       { type: "choix", enonce: "Choisissez la bonne graphie :", options: ["appeller", "appeler", "apeler"], reponse: 1, note: "Deux p, un seul l à l'infinitif." },
       { type: "choix", enonce: "Choisissez la bonne graphie :", options: ["professionel", "professionnel"], reponse: 1, note: "Deux n." },
@@ -171,7 +171,7 @@ window.MPM_EXERCICES = [
   {
     id: "varie-abdon", date: "2026-07-30", saint: "Saint Abdon", niveau: "b1",
     theme: "Vocabulaire", titre: "Du nom à l'adjectif",
-    accroche: "Dériver, mesurer, opposer : trois exercices en un.",
+    accroche: "Trois exercices, le temps d'un café.",
     items: [
       { type: "choix", enonce: "la révolution → l'adjectif :", options: ["révolutionnaire", "révolutionnel", "révolutif"], reponse: 0, note: "Suffixe -aire." },
       { type: "choix", enonce: "le courage → l'adjectif :", options: ["courageux", "couragier", "couragieux"], reponse: 0, note: "Suffixe -eux." },
@@ -187,7 +187,7 @@ window.MPM_EXERCICES = [
   {
     id: "conjugaison-germain", date: "2026-07-31", saint: "Saint Germain", niveau: "b1",
     theme: "Conjugaison", titre: "Deux passés, un futur",
-    accroche: "Le passé composé pour l'événement, l'imparfait pour le décor, le futur pour la suite.",
+    accroche: "Hier, autrefois, demain : trois temps dans une même histoire.",
     items: [
       { type: "choix", enonce: "Hier, un imprévu ___ (survenir) pendant la réunion.", options: ["est survenu", "a survenu"], reponse: 0, note: "Survenir se conjugue avec être." },
       { type: "choix", enonce: "Les ingénieurs ___ (résoudre) enfin le problème.", options: ["ont résolu", "ont résous", "sont résolus"], reponse: 0, note: "Participe passé irrégulier : résolu." },
@@ -203,7 +203,7 @@ window.MPM_EXERCICES = [
   {
     id: "vocabulaire-pierre", date: "2026-08-01", saint: "Saint Pierre", niveau: "a2",
     theme: "Vocabulaire", titre: "Le mot juste, en images",
-    accroche: "Regardez l'image, écrivez le mot. Pensez à l'article.",
+    accroche: "Onze images, onze mots. Les reconnaîtrez-vous ?",
     items: [
       { type: "image", enonce: "Elle a des tentacules.", image: "uploads/tweetybirdhorizon_une_pieuvre_--chaos_25_--ar_11_--profile_au_af8206f9-e126-40b4-8aa9-bb6ad8f01a15_0.png", options: ["une pieuvre", "une méduse", "une écrevisse"], reponse: 0, note: "Une pieuvre — on dit aussi un poulpe." },
       { type: "image", enonce: "Il dort en nageant.", image: "uploads/tweetybirdhorizon_un_requin_--chaos_25_--ar_11_--sref_httpss._34961576-465e-4f53-a8b0-34cdbfeb9d7b_1.png", options: ["un requin", "un dauphin", "un espadon"], reponse: 0, note: "Un requin." },
@@ -219,7 +219,7 @@ window.MPM_EXERCICES = [
   {
     id: "pluriel-etienne", date: "2026-08-03", saint: "Saint Étienne", niveau: "b1",
     theme: "Orthographe", titre: "Le pluriel des noms",
-    accroche: "Un s, un x, ou rien du tout ?",
+    accroche: "Un s, un x, ou rien du tout ? À vous de trancher.",
     items: [
       { type: "choix", enonce: "un journal → des…", options: ["journaux", "journals"], reponse: 0, note: "Les noms en -al font -aux." },
       { type: "choix", enonce: "un bijou → des…", options: ["bijoux", "bijous"], reponse: 0, note: "Bijou, caillou, chou, genou, hibou, joujou, pou prennent un x." },
@@ -263,7 +263,7 @@ window.MPM_EXERCICES = [
   {
     id: "geographie-cyriaque", date: "2026-08-08", saint: "Saint Cyriaque", niveau: "a2",
     theme: "Vocabulaire", titre: "Pays et nationalités",
-    accroche: "Le féminin ajoute souvent un -e, mais pas toujours.",
+    accroche: "Quatre continents, et le nom qu'on donne à ceux qui y vivent.",
     items: [
       { type: "choix", enonce: "le Portugal → il est…", options: ["portugais", "portugal", "portugien"], reponse: 0, note: "Et elle est portugaise." },
       { type: "choix", enonce: "l'Autriche → elle est…", options: ["autrichienne", "autrichaine", "autrichoise"], reponse: 0, note: "La consonne double : autrichien, autrichienne." },
@@ -279,7 +279,7 @@ window.MPM_EXERCICES = [
   {
     id: "plage-laurent", date: "2026-08-10", saint: "Saint Laurent", niveau: "a2",
     theme: "Grammaire", titre: "La plage et le conditionnel",
-    accroche: "Si j'avais un parasol… Le conditionnel après « si ».",
+    accroche: "Si j'avais un parasol… Une journée à la plage avec Camille et Julien.",
     items: [
       { type: "choix", enonce: "On l'ouvre pour se protéger du soleil : un ___", options: ["parasol", "paravent", "parapluie"], reponse: 0, note: "Un parasol." },
       { type: "choix", enonce: "On les met aux pieds pour marcher sur le sable chaud : des ___", options: ["tongs", "palmes", "chaussons"], reponse: 0, note: "Des tongs." },
@@ -294,7 +294,7 @@ window.MPM_EXERCICES = [
   {
     id: "temporelles-suzanne", date: "2026-08-11", saint: "Sainte Suzanne", niveau: "b1",
     theme: "Grammaire", titre: "Les propositions temporelles",
-    accroche: "Avant que veut le subjonctif ; quand veut l'indicatif.",
+    accroche: "Avant, pendant, après : mettre de l'ordre dans le temps.",
     items: [
       { type: "choix", enonce: "Après « avant que », on emploie :", options: ["l'indicatif", "le subjonctif"], reponse: 1, note: "Avant que et en attendant que : subjonctif." },
       { type: "choix", enonce: "Après « quand », « lorsque », « après que », on emploie :", options: ["l'indicatif", "le subjonctif"], reponse: 0, note: "Le fait est posé comme réel." },
@@ -309,7 +309,7 @@ window.MPM_EXERCICES = [
   {
     id: "liaisons-hippolyte", date: "2026-08-13", saint: "Saint Hippolyte", niveau: "b1",
     theme: "Prononciation", titre: "Les liaisons et le H",
-    accroche: "H muet ou H aspiré : la lettre ne se prononce jamais, mais elle change tout.",
+    accroche: "La lettre qu'on n'entend jamais, et qui change tout.",
     items: [
       { type: "ecoute", enonce: "La liaison se fait-elle ?", audio: "Les enfants du cocher jouaient dans la cour.", options: ["Oui, obligatoire", "Non, interdite"], reponse: 0, note: "Déterminant + nom : liaison obligatoire." },
       { type: "ecoute", enonce: "La liaison se fait-elle ?", audio: "Les héros de la fable étaient deux frères.", options: ["Oui, obligatoire", "Non, interdite"], reponse: 1, note: "Héros commence par un H aspiré." },
@@ -324,7 +324,7 @@ window.MPM_EXERCICES = [
   {
     id: "conjugaison-assomption", date: "2026-08-15", saint: "l'Assomption", niveau: "a2",
     theme: "Conjugaison", titre: "Le deuxième groupe et le futur",
-    accroche: "Finir, grandir, bâtir : la famille en -issons.",
+    accroche: "Finir, grandir, bâtir : les verbes qui construisent.",
     items: [
       { type: "choix", enonce: "Présent — nous (maigrir) :", options: ["nous maigrissons", "nous maigrons", "nous maigrions"], reponse: 0, note: "Deuxième groupe : -issons au pluriel." },
       { type: "choix", enonce: "Présent — ils (réunir) :", options: ["ils réunissent", "ils réunent", "ils réunient"], reponse: 0, note: "-issent." },
@@ -352,6 +352,21 @@ window.MPM_EXERCICES = [
     histoire: "Hyacinthe parcourut l'Europe du Nord à pied. On raconte qu'il traversait les fleuves sans bateau, son manteau étendu sur l'eau."
   },
   {
+    id: "mots-croises-eusebe", date: "2026-08-19", saint: "Saint Eusèbe", niveau: "a2",
+    theme: "Jeux de mots", titre: "Les mots croisés de l'été",
+    accroche: "Cinq grilles : l'été, les vacances, la table et le jardin.",
+    items: [
+      { type: "choix", enonce: "Sport de glisse sur les vagues (4 lettres) :", options: ["le surf", "la rame", "la voile"], reponse: 0, note: "SURF." },
+      { type: "choix", enonce: "Coquillage noir, servi avec des frites (5 lettres) :", options: ["la moule", "l'huître", "la palourde"], reponse: 0, note: "MOULE : moules-frites." },
+      { type: "choix", enonce: "Terre entourée d'eau de tous côtés (3 lettres) :", options: ["une île", "un cap", "une baie"], reponse: 0, note: "ÎLE." },
+      { type: "choix", enonce: "Fruit jaune coiffé d'une couronne de feuilles (6 lettres) :", options: ["l'ananas", "la banane", "le citron"], reponse: 0, note: "ANANAS." },
+      { type: "choix", enonce: "Grande étendue d'eau salée (3 lettres) :", options: ["la mer", "le lac", "la rade"], reponse: 0, note: "MER." },
+      { type: "choix", enonce: "Aliment sucré fabriqué par les abeilles (4 lettres) :", options: ["le miel", "la cire", "le sirop"], reponse: 0, note: "MIEL." },
+      { type: "ecoute", enonce: "Écoutez : quel mot du jardin entendez-vous ?", audio: "L'oiseau a bâti son nid dans le grand arbre du jardin.", options: ["un nid", "un rat", "un lit"], reponse: 0, note: "NID : la petite maison que l'oiseau bâtit." }
+    ],
+    histoire: "Eusèbe fut prêtre à Rome au quatrième siècle. La tradition raconte qu'on l'enferma chez lui plusieurs mois, et qu'il continua d'enseigner à travers sa porte close."
+  },
+  {
     id: "verbes-bernard", date: "2026-08-20", saint: "Saint Bernard", niveau: "a2",
     theme: "Vocabulaire", titre: "Les verbes de la montagne",
     accroche: "Le mot exact pour chaque geste, et le cri de chaque bête.",
@@ -370,7 +385,7 @@ window.MPM_EXERCICES = [
   {
     id: "passe-compose-zephyrin", date: "2026-08-26", saint: "Saint Zéphyrin", niveau: "a2",
     theme: "Conjugaison", titre: "Le passé composé : avoir ou être ?",
-    accroche: "Le choix de l'auxiliaire, puis l'accord.",
+    accroche: "Ce qu'on a fait, et ce qu'on est devenu.",
     items: [
       { type: "choix", enonce: "Les moissonneurs ___ partis avant le lever du jour.", options: ["ont", "sont"], reponse: 1, note: "Partir : être, et accord avec le sujet." },
       { type: "choix", enonce: "Ma sœur ___ (rentrer) de la campagne dimanche.", options: ["est rentrée", "a rentré", "est rentré"], reponse: 0, note: "Être + accord au féminin." },
@@ -402,7 +417,7 @@ window.MPM_EXERCICES = [
   {
     id: "temps-augustin", date: "2026-08-28", saint: "Saint Augustin", niveau: "a2",
     theme: "Grammaire", titre: "L'expression du temps",
-    accroche: "Depuis regarde derrière, dans regarde devant, il y a mesure la distance.",
+    accroche: "Tout à l'heure, depuis huit jours, dans un mois : dire quand.",
     items: [
       { type: "choix", enonce: "Marcel habite dans notre village ___ trois ans.", options: ["depuis", "il y a", "dans"], reponse: 0, note: "Depuis : l'action continue." },
       { type: "choix", enonce: "___ un mois, Hiro est arrivé en France.", options: ["Depuis", "Il y a", "Dans"], reponse: 1, note: "Il y a regarde vers le passé." },
@@ -417,7 +432,7 @@ window.MPM_EXERCICES = [
   {
     id: "questions-mederic", date: "2026-08-31", saint: "Saint Médéric", niveau: "a2",
     theme: "Grammaire", titre: "Où, quand, comment",
-    accroche: "Poser une question, et la poser bien.",
+    accroche: "Tout ce qu'on peut demander avec cinq petits mots.",
     items: [
       { type: "choix", enonce: "Réponse : « J'habite à Tours. » Question : ___ habitez-vous ?", options: ["Où", "Quand", "Comment"], reponse: 0, note: "Où interroge sur le lieu." },
       { type: "choix", enonce: "Réponse : « À dix heures. » Question :", options: ["Quand ouvre le musée ?", "À quelle heure ouvre le musée ?"], reponse: 1, note: "L'heure précise appelle à quelle heure." },
@@ -433,7 +448,7 @@ window.MPM_EXERCICES = [
   {
     id: "lequel-gilles", date: "2026-09-01", saint: "Saint Gilles", niveau: "b1",
     theme: "Grammaire", titre: "Lequel, auquel, duquel",
-    accroche: "Le pronom s'accorde avec le nom qu'il remplace, puis la préposition vient se coller devant.",
+    accroche: "Lequel ? Auquel ? Duquel ? Le mot qui évite de se répéter.",
     items: [
       { type: "choix", enonce: "Deux tartes : ___ voulez-vous ?", options: ["Lequel", "Laquelle", "Lesquelles"], reponse: 1, note: "Une tarte, féminin singulier." },
       { type: "choix", enonce: "Trois trains : ___ arrive le premier ?", options: ["Laquelle", "Lesquels", "Lequel"], reponse: 2, note: "Un train, masculin singulier." },
@@ -471,9 +486,9 @@ window.MPM_EXERCICES = [
       { type: "choix", enonce: "Les Grecs ont fondé Palerme. → Palerme ___ par les Grecs.", options: ["a été fondée", "a été fondé", "est fondant"], reponse: 0, note: "Passé composé passif : avoir été + participe accordé avec le sujet." },
       { type: "choix", enonce: "On servira les cannoli au dessert. → Les cannoli ___ au dessert.", options: ["seront servis", "seront servi", "sont servir"], reponse: 0, note: "Futur passif : les cannoli sont masculin pluriel." },
       { type: "choix", enonce: "Un berger découvrit les reliques. → Les reliques…", options: ["furent découvertes", "furent découvert", "sont découvrir"], reponse: 0, note: "Le participe s'accorde toujours avec le sujet : découvertes." },
-      { type: "choix", enonce: "Le port de Palerme est entouré ___ montagnes.", options: ["par", "de"], reponse: 1, note: "Un état, une description : « de ». L'action véritable prend « par »." },
       { type: "choix", enonce: "La chapelle a été bâtie ___ un architecte sicilien.", options: ["par", "de"], reponse: 0, note: "Une action véritable, avec son auteur : « par »." },
-      { type: "choix", enonce: "Rosalie est aimée ___ tous les Palermitains.", options: ["par", "de"], reponse: 1, note: "Les verbes de sentiment préfèrent « de » : aimée de tous, respectée de tous." },
+      { type: "choix", enonce: "Les mosaïques ___ (admirer, présent) par des milliers de visiteurs.", options: ["sont admirées", "sont admirés", "ont admiré"], reponse: 0, note: "Présent passif : sont + participe accordé au féminin pluriel." },
+      { type: "choix", enonce: "Le marché ouvrira ses portes à l'aube. → Les portes ___ à l'aube.", options: ["seront ouvertes", "seront ouvert", "sont ouvrir"], reponse: 0, note: "Futur passif, participe accordé au féminin pluriel." },
       { type: "choix", enonce: "Autrefois, l'île ___ (gouverner, imparfait) par des rois normands.", options: ["était gouvernée", "est gouvernée", "a été gouvernée"], reponse: 0, note: "Imparfait passif : était + participe accordé." },
       { type: "choix", enonce: "Ce dessert a été inventé à Palerme. → On ___ ce dessert à Palerme.", options: ["a inventé", "a inventée", "est inventé"], reponse: 0, note: "Avec « on », le participe ne s'accorde plus." },
       { type: "ecoute", enonce: "Écoutez : quelle forme passive entendez-vous ?", audio: "Les fresques de la chapelle sont restaurées avec soin.", options: ["sont restaurées", "sont restaurés", "ont restauré"], reponse: 0, note: "Présent passif : sont + participe accordé au féminin pluriel." }
@@ -496,6 +511,84 @@ window.MPM_EXERCICES = [
       { type: "choix", enonce: "Aujourd'hui, une ville ___ bord de la Seine porte son nom.", options: ["en", "dans", "au"], reponse: 2, note: "L'expression se dit « au bord de » : au bord de la mer, au bord de la route." }
     ],
     histoire: "Cloud était le petit-fils de Clovis et de la reine Clotilde. Il grandit à la cour des rois francs, puis choisit une autre vie : il partit loin de Paris, apprit auprès d'un ermite et se fit moine. Il s'établit ensuite dans un village au bord de la Seine, où il enseignait et cultivait la terre. Ce village porte aujourd'hui son nom : Saint-Cloud."
+  },
+  {
+    id: "possessifs-nativite", date: "2026-09-08", saint: "Nativité de Notre-Dame", niveau: "a2",
+    theme: "Grammaire", titre: "Les adjectifs possessifs",
+    accroche: "L'arbre d'une famille française : à qui est qui.",
+    items: [
+      { type: "choix", enonce: "Marie prépare le gâteau avec ___ grand-mère Odile.", options: ["son", "sa", "ses"], reponse: 1, note: "Le mot s'accorde avec la chose possédée : « grand-mère » est féminin." },
+      { type: "choix", enonce: "Jean cherche ___ chaussures dans le couloir.", options: ["sa", "son", "ses"], reponse: 2, note: "« Chaussures » est au pluriel : « ses »." },
+      { type: "choix", enonce: "« Voici ___ chambre », dit Marie à sa cousine.", options: ["ma", "mon", "mes"], reponse: 0, note: "Marie parle d'elle-même, et « chambre » est féminin." },
+      { type: "choix", enonce: "Paul et Louise reçoivent ___ famille chaque dimanche.", options: ["leurs", "leur", "sa"], reponse: 1, note: "Deux possesseurs, mais une seule famille : « leur » sans s." },
+      { type: "choix", enonce: "Agnès arrive avec ___ fille Claire.", options: ["sa", "son", "ses"], reponse: 0, note: "Le possesseur est une femme, mais c'est « fille » qui décide : « sa »." },
+      { type: "choix", enonce: "« Où est ___ manteau ? », demande Odile à Henri.", options: ["son", "ton", "votre"], reponse: 1, note: "Odile parle à son mari : on se tutoie, donc « ton »." },
+      { type: "choix", enonce: "Nous mangeons dans ___ vieille cuisine, comme autrefois.", options: ["nos", "notre", "leur"], reponse: 1, note: "« Nous » et une seule cuisine : « notre »." },
+      { type: "choix", enonce: "Qui est Claire pour Jean ? Claire est ___ cousine.", options: ["sa", "leur", "ses"], reponse: 0, note: "Un seul possesseur, Jean, et une cousine : « sa »." },
+      { type: "choix", enonce: "Qui est Henri pour Marie et Jean ? Henri est ___ grand-père.", options: ["son", "leur", "leurs"], reponse: 1, note: "Deux possesseurs, un seul grand-père : « leur »." },
+      { type: "choix", enonce: "Les grands-parents sont venus avec ___ cadeaux.", options: ["leur", "leurs", "ses"], reponse: 1, note: "Plusieurs cadeaux : « leurs » prend un s." },
+      { type: "choix", enonce: "Depuis ce jour, la famille fête ___ anniversaire à la fin de l'été.", options: ["sa", "son", "ses"], reponse: 1, note: "« Anniversaire » est masculin : « son »." }
+    ],
+    histoire: "Le 8 septembre, l'Église fête la naissance de Marie. La tradition donne à ses parents les noms d'Anne et de Joachim, et place cette naissance à Jérusalem, dans une maison simple. En France, ce jour tombe à la fin des moissons : on l'appelait autrefois la Notre-Dame des vendanges, car il ouvrait la saison du raisin. Les familles se retrouvaient dans les vignes, et l'on parlait beaucoup de sa mère, de son père, de ses cousins."
+  },
+  {
+    id: "chaperon-adrien", date: "2026-09-09", saint: "Saint Adrien", niveau: "a2",
+    theme: "Compréhension", titre: "Le Petit Chaperon rouge, partie 1",
+    accroche: "Le chemin du bois, la galette, le loup : le conte de Perrault en phrases courtes.",
+    items: [
+      { type: "choix", enonce: "La petite fille a un surnom à cause de son manteau.", options: ["Vrai", "Faux"], reponse: 0, note: "Un manteau rouge avec un capuchon : le Petit Chaperon rouge." },
+      { type: "choix", enonce: "Sa mère met des pommes et un pot de beurre dans le panier.", options: ["Vrai", "Faux"], reponse: 1, note: "Une galette et un petit pot de beurre." },
+      { type: "choix", enonce: "La mère-grand est en bonne santé.", options: ["Vrai", "Faux"], reponse: 1, note: "Elle est malade : c'est pour cela que l'enfant part la voir." },
+      { type: "choix", enonce: "Le loup mange la petite fille dans le bois.", options: ["Vrai", "Faux"], reponse: 1, note: "Il n'ose pas : des bûcherons travaillent tout près." },
+      { type: "choix", enonce: "Le loup prend le chemin le plus long.", options: ["Vrai", "Faux"], reponse: 1, note: "Il prend le plus court, et il court vite." },
+      { type: "choix", enonce: "« Mère-grand », dans le conte, veut dire…", options: ["la mère", "la grand-mère", "la marraine"], reponse: 1, note: "C'est la forme ancienne de « grand-mère », chez Perrault." },
+      { type: "choix", enonce: "Quel temps fait-il ce jour-là ?", options: ["Il pleut", "Le soleil brille entre les arbres", "Il neige"], reponse: 1, note: "Un beau matin d'été." },
+      { type: "choix", enonce: "Où habite la mère-grand ?", options: ["Au bord du bois", "Par-delà le moulin, à la première maison du village", "Derrière l'église"], reponse: 1, note: "C'est la réponse que l'enfant donne au loup." },
+      { type: "choix", enonce: "Pourquoi le loup ne mange-t-il pas la petite fille tout de suite ?", options: ["Il n'a pas faim", "Des bûcherons travaillent tout près", "Il préfère la galette"], reponse: 1, note: "La présence des hommes le retient." },
+      { type: "choix", enonce: "Que propose le loup ?", options: ["De porter le panier", "De prendre chacun un chemin, pour voir qui arrive le premier", "De l'accompagner jusqu'au moulin"], reponse: 1, note: "C'est le pari des deux chemins." },
+      { type: "choix", enonce: "Que fait la petite fille sur le chemin le plus long ?", options: ["Elle court sans s'arrêter", "Elle cueille des noisettes et court après les papillons", "Elle dort sous un arbre"], reponse: 1, note: "Elle prend son temps : le loup arrivera avant elle." }
+    ],
+    histoire: "Charles Perrault publie ce conte en 1697, dans les Histoires ou contes du temps passé. Il a soixante-neuf ans et il est un homme de Versailles : il a travaillé auprès de Colbert et siégé à l'Académie française. Il met par écrit des histoires que l'on se racontait à la veillée, et il les écrit dans une langue simple, pour être lu à voix haute. La suite du Petit Chaperon rouge paraît demain."
+  },
+  {
+    id: "chaperon-nicolas", date: "2026-09-10", saint: "Saint Nicolas de Tolentino", niveau: "a2",
+    theme: "Compréhension", titre: "Le Petit Chaperon rouge, partie 2",
+    accroche: "La chevillette, le lit, la grosse voix : la fin du conte de Perrault.",
+    items: [
+      { type: "choix", enonce: "Le loup arrive le premier chez la mère-grand.", options: ["Vrai", "Faux"], reponse: 0, note: "Il a pris le chemin le plus court." },
+      { type: "choix", enonce: "Le loup entre dans la maison par la fenêtre.", options: ["Vrai", "Faux"], reponse: 1, note: "Il entre par la porte, après avoir tiré la chevillette. C'est à la fin qu'il saute par la fenêtre." },
+      { type: "choix", enonce: "Que dit le loup derrière la porte ?", options: ["Ouvrez, c'est le médecin", "Je suis votre petite-fille, le Petit Chaperon rouge", "Ouvrez, je suis le loup"], reponse: 1, note: "Il prend une petite voix pour se faire ouvrir." },
+      { type: "choix", enonce: "Où le loup enferme-t-il la mère-grand ?", options: ["Dans la cave", "Dans l'armoire", "Au fond du jardin"], reponse: 1, note: "Elle en ressortira à la fin, bien vivante." },
+      { type: "choix", enonce: "Le loup se couche dans le lit avec le bonnet de la mère-grand.", options: ["Vrai", "Faux"], reponse: 0, note: "Le bonnet et les draps tirés jusqu'au menton." },
+      { type: "choix", enonce: "La petite fille reconnaît le loup tout de suite.", options: ["Vrai", "Faux"], reponse: 1, note: "La grosse voix lui fait peur, mais elle croit que sa mère-grand a un rhume." },
+      { type: "choix", enonce: "« Que vous avez de grands bras ! » — « C'est pour mieux t'___, ma fille. »", options: ["embrasser", "embrasse", "embrassant"], reponse: 0, note: "Après « pour mieux », le verbe reste à l'infinitif : on ne le conjugue jamais." },
+      { type: "choix", enonce: "« Que vous avez de grandes jambes ! » — « C'est pour mieux ___. »", options: ["je cours", "courir", "courant"], reponse: 1, note: "Toujours l'infinitif." },
+      { type: "choix", enonce: "« Que vous avez de grandes oreilles ! » — « C'est pour mieux t'___. »", options: ["écouter", "écoute", "écoutes"], reponse: 0, note: "Écouter, et non entendre : le loup fait semblant d'être attentif." },
+      { type: "choix", enonce: "« Que vous avez de grandes dents ! » — « C'est pour mieux te ___ ! »", options: ["mange", "manger", "mangeant"], reponse: 1, note: "La dernière réplique du conte." },
+      { type: "choix", enonce: "C'est un chasseur qui ouvre la porte à la fin.", options: ["Vrai", "Faux"], reponse: 0, note: "Le loup saute par la fenêtre et part loin dans le bois." },
+      { type: "choix", enonce: "Comment le conte se termine-t-il ?", options: ["Le loup emporte la galette", "La mère-grand sort de l'armoire et l'on mange la galette ensemble", "La petite fille repart seule au village"], reponse: 1, note: "Une fin douce, dans cette version." }
+    ],
+    histoire: "Nicolas est né vers 1245 dans un village des Marches, en Italie. Devenu moine augustin, il s'installe à Tolentino et y reste trente ans, sans jamais en repartir. On l'écoutait volontiers : il parlait doucement, et il passait ses journées auprès des malades et des pauvres de la ville. La tradition raconte qu'il tomba malade à son tour, et qu'il guérit après avoir mangé un petit pain trempé dans l'eau. Depuis, on bénit le 10 septembre des petits pains que l'on porte aux malades. Il est mort à Tolentino en 1305, et c'est le premier augustin que l'Église ait canonisé."
+  },
+  {
+    id: "conjugaison-prothe", date: "2026-09-11", saint: "Saint Prothé", niveau: "a2",
+    theme: "Conjugaison", titre: "Les verbes en -dre",
+    accroche: "Des verbes du troisième groupe qui ne suivent pas les mêmes règles.",
+    items: [
+      { type: "choix", enonce: "J'___ la pluie sur les volets.", options: ["entend", "entends", "entende"], reponse: 1, note: "Je entends, tu entends, il entend : le s est pour les deux premières personnes." },
+      { type: "choix", enonce: "Nous ___ le train de sept heures.", options: ["attendons", "attendrons", "attendions"], reponse: 0, note: "Présent : nous attendons. Attendrons serait le futur." },
+      { type: "choix", enonce: "Vous ___ toujours avec patience.", options: ["répondes", "répondez", "répondiez"], reponse: 1, note: "Vous répondez, comme vous attendez, vous descendez." },
+      { type: "choix", enonce: "Ils ___ l'escalier doucement.", options: ["descend", "descendent", "descendes"], reponse: 1, note: "Le d revient à toutes les personnes : ils descendent." },
+      { type: "choix", enonce: "Je ___ la porte du jardin en bleu.", options: ["peint", "peins", "peinds"], reponse: 1, note: "Je peins : la famille de peindre perd le d au singulier." },
+      { type: "choix", enonce: "Nous ___ ensemble le dimanche.", options: ["peindons", "peignons", "peinons"], reponse: 1, note: "Au pluriel, le d devient gn : nous peignons." },
+      { type: "choix", enonce: "Elle ___ la lampe à minuit.", options: ["éteint", "éteind", "éteins"], reponse: 0, note: "Il ou elle éteint, sans d et sans s." },
+      { type: "choix", enonce: "Vous ___ le froid de novembre.", options: ["craindez", "craignez", "craigniez"], reponse: 1, note: "Craindre suit peindre : vous craignez." },
+      { type: "choix", enonce: "Ils ___ une photo à leur lettre.", options: ["joindent", "joignent", "joinent"], reponse: 1, note: "Ils joignent, comme ils peignent." },
+      { type: "choix", enonce: "Hier, nous ___ un beau concert.", options: ["avons entendu", "avons entendus", "sommes entendus"], reponse: 0, note: "Avec avoir, le participe ne s'accorde pas avec le sujet." },
+      { type: "choix", enonce: "Mon frère ___ tout le salon.", options: ["a peindu", "a peint", "a peins"], reponse: 1, note: "Le participe de peindre est peint." },
+      { type: "choix", enonce: "J'___ la radio pour mieux lire.", options: ["ai éteind", "ai éteint", "ai éteins"], reponse: 1, note: "Éteindre donne éteint, comme peindre donne peint." }
+    ],
+    histoire: "Prothé et son frère Hyacinthe vivaient à Rome. Ils servaient une jeune femme de bonne famille, Eugénie, et ils l'ont suivie quand elle est devenue chrétienne. Tous les trois lisaient les livres saints ensemble. On raconte qu'ils répondaient avec calme et douceur à ceux qui les interrogeaient. Le calendrier de 1714 les fête le 11 septembre. Leurs tombes ont été retrouvées au dix-neuvième siècle, sur la voie Salaria. Le mot qui leur convient est justement un verbe du jour : ils ont su entendre et répondre."
   }
 ];
 

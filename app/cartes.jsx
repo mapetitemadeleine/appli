@@ -260,7 +260,7 @@
     }
 
     return (
-      <div style={{ padding: '14px 18px 26px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+      <div style={{ height: '100%', minHeight: 430, boxSizing: 'border-box', padding: '12px 18px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
 
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
           <Pilule actif={borne === 20} onClick={() => choisirBorne(20)}>jusqu'à 20</Pilule>
@@ -268,7 +268,8 @@
           <Pilule actif={borne === 100} onClick={() => choisirBorne(100)}>100</Pilule>
         </div>
 
-        <div style={{ position: 'relative', width: 'min(288px, 100%)', aspectRatio: '63 / 88' }}>
+        <div style={{ flex: 1, minHeight: 0, width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ position: 'relative', height: '100%', aspectRatio: '63 / 88', maxWidth: '100%', containerType: 'size' }}>
           <div style={{ position: 'absolute', inset: 0, transform: 'rotate(2.5deg) translateY(6px)', background: C.ivoire2, border: '1px solid ' + C.ligne, borderRadius: 6 }} />
           <div style={{ position: 'absolute', inset: 0, transform: 'rotate(-1.5deg) translateY(3px)', background: C.ivoire2, border: '1px solid ' + C.ligne, borderRadius: 6 }} />
 
@@ -287,7 +288,7 @@
                     <div style={{ position: 'absolute', top: 10, right: 10 }}><Medaillon couleur={bord} /></div>
                     <div style={{ position: 'absolute', bottom: 10, left: 10 }}><Medaillon couleur={bord} /></div>
                     <div style={{ position: 'absolute', bottom: 10, right: 10 }}><Medaillon couleur={bord} /></div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', fontSize: voir ? 132 : 96, lineHeight: 1, letterSpacing: '-0.01em', color: C.navy, textShadow: contour(bord) }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', fontSize: voir ? 'min(132px, 33cqh)' : 'min(96px, 24cqh)', lineHeight: 1, letterSpacing: '-0.01em', color: C.navy, textShadow: contour(bord) }}>
                       {glyphes(voir ? String(n) : '?')}
                     </div>
                   </div>
@@ -295,10 +296,10 @@
 
                 <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: C.ivoire2, border: '1px solid ' + bord, borderRadius: 6, boxShadow: '0 8px 22px rgba(28,43,79,0.10)', padding: 6 }}>
                   <div style={{ height: '100%', border: '1px solid ' + C.or5, borderRadius: 3, background: teinte, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '16px 14px', textAlign: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', fontSize: 118, lineHeight: 0.9, letterSpacing: '-0.01em', color: C.or7 }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', fontSize: 'min(118px, 30cqh)', lineHeight: 0.9, letterSpacing: '-0.01em', color: C.or7 }}>
                       {glyphes(n)}
                     </div>
-                    <div style={{ fontFamily: SERIF, fontWeight: 600, fontSize: mot.length > 16 ? 27 : 34, lineHeight: 1.08, color: C.navy, textWrap: 'balance' }}>{mot}</div>
+                    <div style={{ fontFamily: SERIF, fontWeight: 600, fontSize: mot.length > 16 ? 'min(27px, 7cqh)' : 'min(34px, 9cqh)', lineHeight: 1.08, color: C.navy, textWrap: 'balance' }}>{mot}</div>
                   </div>
                 </div>
               </div>
@@ -319,14 +320,15 @@
             </div>
           )}
         </div>
+        </div>
 
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <Picto actif={voir} onClick={() => choisirMode('voir')} titre="Je vois le chiffre">{OEIL}</Picto>
           <Picto actif={!voir} onClick={() => choisirMode('ecouter')} titre="J'écoute la voix">{VOIX}</Picto>
         </div>
 
-        <div style={{ fontFamily: BODY, fontSize: 15, color: C.navy3, textAlign: 'center', maxWidth: 260, textWrap: 'pretty' }}>
-          Touchez pour retourner. À droite si vous l'avez, à gauche pour la revoir.
+        <div style={{ fontFamily: BODY, fontSize: 15, color: C.navy3, textAlign: 'center', maxWidth: 300, textWrap: 'pretty' }}>
+          Touchez pour retourner · à droite si vous l'avez
         </div>
 
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>

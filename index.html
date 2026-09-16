@@ -21,7 +21,7 @@
 html,body{margin:0;height:100%;overscroll-behavior:none}
 body{background:#FBF6EC;font-family:'EB Garamond',Georgia,serif;font-weight:500;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 #root{position:fixed;inset:0;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:#FBF6EC;box-sizing:border-box}
-#root>div{height:100%}
+#root>div{zoom:var(--mpm-zoom,1);height:100%;width:100%}
 a{color:#8F6518}a:hover{color:#B8862B}
 button{font-weight:500;font-family:inherit}
 #root ::-webkit-scrollbar{width:0;height:0}
@@ -33,20 +33,48 @@ button{font-weight:500;font-family:inherit}
 #ajout{position:fixed;left:12px;right:12px;top:calc(12px + env(safe-area-inset-top));z-index:98;background:#1C2B4F;color:#FBF6EC;border-radius:14px;padding:14px 16px;display:none;gap:12px;align-items:center;font-size:16px;line-height:1.4;box-shadow:0 12px 30px rgba(28,43,79,.28)}
 #ajout b{color:#D9AE5C;font-weight:600}
 #ajout button{margin-left:auto;flex:none;background:none;border:1px solid rgba(251,246,236,.4);color:#FBF6EC;border-radius:9px;padding:7px 12px;font-size:15px}
+
+/* Réglages : le cadre sur grand écran */
+@media (min-width:620px){
+  body[data-cadre="tablette"] #root{left:0;right:0;width:auto;margin-left:0;border-left:0;border-right:0;display:flex;justify-content:center;padding-left:56px;padding-right:56px}
+  body[data-cadre="tablette"] #root>div{width:min(100%,calc(100vh * 0.58));border-left:1px solid #E6D9BC;border-right:1px solid #E6D9BC}
+  body[data-ambiance="soir"][data-cadre="tablette"] #root>div{border-color:#33456B}
+  body[data-ambiance="gravure"][data-cadre="tablette"] #root>div{border-color:#BFB49A}
+  /* Plein écran : la colonne garde les proportions de la tablette, avec une marge de chaque côté */
+  body[data-cadre="plein"] #root{left:0;right:0;width:auto;margin-left:0;border-left:0;border-right:0;display:flex;justify-content:center;padding-left:56px;padding-right:56px}
+  body[data-cadre="plein"] #root>div{width:min(100%,calc(100vh * 0.72));border-left:1px solid #E6D9BC;border-right:1px solid #E6D9BC}
+  body[data-ambiance="soir"][data-cadre="plein"] #root>div{border-color:#33456B}
+  body[data-ambiance="gravure"][data-cadre="plein"] #root>div{border-color:#BFB49A}
+  body[data-cadre="plein"] #ajout{left:12px;right:12px;width:auto;margin-left:0}
+}
+
+/* Réglages : l'ambiance (les surfaces peintes par la feuille de style) */
+body[data-ambiance="soir"]{background:#0E1626;color-scheme:dark}
+body[data-ambiance="soir"] #root{background:#141F35;border-color:#33456B}
+body[data-ambiance="soir"] #demarrage{background:#141F35}
+body[data-ambiance="soir"] #demarrage .n{color:#F2E8D5}
+body[data-ambiance="soir"] #demarrage .f{color:#E0B463}
+body[data-ambiance="soir"] a{color:#E0B463}
+body[data-ambiance="gravure"]{background:#E7E0D1}
+body[data-ambiance="gravure"] #root{background:#F2EDE1;border-color:#BFB49A}
+body[data-ambiance="gravure"] #demarrage{background:#F2EDE1}
+body[data-ambiance="gravure"] #demarrage .n{color:#14161A}
+body[data-ambiance="gravure"] #demarrage .f{color:#8A6A22}
+body[data-ambiance="gravure"] a{color:#6E5514}
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script src="_ds_bundle.js"></script>
 <!-- après le bundle : il embarque une vieille copie de la liste, le vrai fichier doit passer en dernier -->
-<script src="app/exercices.js?v=20260907"></script>
+<script src="app/exercices.js?v=20260916d"></script>
 </head>
 <body>
 <div id="root"></div>
 <div id="demarrage"><img src="assets/logo/madeleine-logo-transparent.png" alt=""><div class="n">Ma petite madeleine</div><div class="f">⚜</div></div>
 <div id="ajout"><span>Pour la garder sous la main&nbsp;: <b>Partager</b> puis <b>Sur l'écran d'accueil</b>.</span><button type="button" id="ajout-ok">Compris</button></div>
-<script type="text/babel" src="app/cartes.jsx?v=20260912"></script>
-<script type="text/babel" src="app/mpm-app.jsx?v=20260907"></script>
+<script type="text/babel" src="app/cartes.jsx?v=20260916"></script>
+<script type="text/babel" src="app/mpm-app.jsx?v=20260916c"></script>
 <script type="text/babel">
 ReactDOM.createRoot(document.getElementById('root')).render(<window.App />);
 const voile = document.getElementById('demarrage');
@@ -71,6 +99,146 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
     } catch(e){}
   });
 }
+</script>
+<div id="reglages"></div>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "ambiance": "Jour",
+  "lecture": "Grand",
+  "cadre": "Plein écran"
+}/*EDITMODE-END*/;
+
+const PALETTES = {
+  Soir: {
+    '#FBF6EC':'#141F35','#FDFBF6':'#1A2742','#FFFFFF':'#1A2742','#F4EBD8':'#1E2C49',
+    '#E6D9BC':'#33456B','#1C2B4F':'#F2E8D5','#141F3A':'#F2E8D5','#38507C':'#C6CEE2',
+    '#7C8CAE':'#93A1BF','#8F6518':'#E0B463','#B8862B':'#E0B463','#D9AE5C':'#F0CE8A',
+    '#F3E4C0':'#3A2F1A','#E7ECDF':'#22402F','#DCE2ED':'#22304C','#F1DEDC':'#3D2422',
+    '#A8322F':'#E0736C','#C0443C':'#E0736C'
+  },
+  Gravure: {
+    '#FBF6EC':'#F2EDE1','#FDFBF6':'#FAF7F0','#FFFFFF':'#FAF7F0','#F4EBD8':'#EAE3D2',
+    '#E6D9BC':'#BFB49A','#1C2B4F':'#14161A','#141F3A':'#14161A','#38507C':'#3A3F49',
+    '#7C8CAE':'#7B8189','#8F6518':'#6E5514','#B8862B':'#8A6A22','#D9AE5C':'#B9944A',
+    '#F3E4C0':'#E3D9BF','#E7ECDF':'#DFE2D4','#DCE2ED':'#DDDCD6','#F1DEDC':'#E8DAD6'
+  }
+};
+const ZOOMS = { 'Normal': 1, 'Grand': 1.12, 'Très grand': 1.26 };
+const CADRES = { 'Téléphone': 'telephone', 'Tablette': 'tablette', 'Plein écran': 'plein' };
+
+// Le fond des pages est peint en style en ligne par l'appli : on repeint au vol,
+// en gardant la valeur d'origine de chaque élément pour pouvoir revenir au jour.
+const memoire = new WeakMap();
+let observateur = null;
+const RE_COULEUR = /#[0-9a-f]{6}\b|rgba?\([^)]*\)/gi;
+
+function cle(c) {
+  c = String(c).trim().toLowerCase();
+  if (c[0] === '#' && c.length >= 7) { const n = parseInt(c.slice(1, 7), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(','); }
+  const m = c.match(/rgba?\(([^)]+)\)/);
+  if (!m) return null;
+  const p = m[1].split(/[,\s/]+/).filter(Boolean).map(parseFloat);
+  return p.slice(0, 3).join(',');
+}
+function normaliser(table) {
+  const sortie = {};
+  for (const k in table) { const c = cle(k); if (c) sortie[c] = table[k]; }
+  return sortie;
+}
+function versHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2;
+  let h = 0, s = 0;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    h *= 60;
+  }
+  return [h, s, l];
+}
+function hsl(h, s, l) { return 'hsl(' + Math.round(h) + ', ' + Math.round(s * 100) + '%, ' + Math.round(l * 100) + '%)'; }
+// Les teintes que la table ne connaît pas (fonds pastel calculés par l'appli) :
+// on les retourne dans la nuit, on les assagit dans la gravure.
+const SECOURS = {
+  Soir: (r, g, b) => { const [h, s, l] = versHsl(r, g, b); return hsl(h, Math.min(s * 0.62, 0.45), Math.max(0.08, Math.min(0.92, 1 - l) * 0.34 + 0.06)); },
+  Gravure: (r, g, b) => { const [h, s, l] = versHsl(r, g, b); return hsl(h, s * 0.4, l > 0.55 ? Math.min(0.96, l + 0.02) : l * 0.82); }
+};
+
+function teindre(texte, table, secours) {
+  return texte.replace(RE_COULEUR, m => {
+    const k = cle(m);
+    let cible = table[k];
+    if (!cible && secours && k) { const p = k.split(',').map(Number); cible = secours(p[0], p[1], p[2]); }
+    if (!cible) return m;
+    const alpha = m.match(/rgba\(([^)]+)\)/);
+    if (alpha) {
+      const p = alpha[1].split(/[,\s/]+/).filter(Boolean);
+      if (p.length > 3 && cible[0] === '#') return 'rgba(' + cle(cible).split(',').join(', ') + ', ' + p[3] + ')';
+      if (p.length > 3) return m;
+    }
+    return cible;
+  });
+}
+
+function repeindre(palette, secours) {
+  const racine = document.getElementById('root');
+  if (!racine) return;
+  if (observateur) observateur.disconnect();
+  racine.querySelectorAll('[style]').forEach(el => {
+    const actuel = el.getAttribute('style') || '';
+    let fiche = memoire.get(el);
+    if (!fiche || actuel !== fiche.sortie) { fiche = { origine: actuel, sortie: actuel }; memoire.set(el, fiche); }
+    const voulu = palette ? teindre(fiche.origine, palette, secours) : fiche.origine;
+    if (voulu !== actuel) el.setAttribute('style', voulu);
+    fiche.sortie = voulu;
+  });
+  if (observateur) { observateur.takeRecords(); observateur.observe(racine, { subtree: true, childList: true, attributes: true, attributeFilter: ['style'] }); }
+}
+
+function MPMReglages() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const palette = PALETTES[t.ambiance] ? normaliser(PALETTES[t.ambiance]) : null;
+  const secours = SECOURS[t.ambiance] || null;
+
+  React.useEffect(() => {
+    document.body.dataset.ambiance = palette ? t.ambiance.toLowerCase() : 'jour';
+    const racine = document.getElementById('root');
+    if (!racine) return;
+    let attente = null;
+    observateur = new MutationObserver(() => {
+      if (attente) return;
+      attente = requestAnimationFrame(() => { attente = null; repeindre(palette, secours); });
+    });
+    repeindre(palette, secours);
+    return () => { if (attente) cancelAnimationFrame(attente); observateur.disconnect(); observateur = null; };
+  }, [t.ambiance]);
+
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--mpm-zoom', ZOOMS[t.lecture] || 1);
+  }, [t.lecture]);
+
+  React.useEffect(() => {
+    document.body.dataset.cadre = CADRES[t.cadre] || 'telephone';
+  }, [t.cadre]);
+
+  return (
+    <TweaksPanel>
+      <TweakSection label="L'ambiance" />
+      <TweakRadio label="Le papier" value={t.ambiance} options={['Jour', 'Soir', 'Gravure']}
+                  onChange={v => setTweak('ambiance', v)} />
+      <TweakSection label="Le confort" />
+      <TweakRadio label="Lecture" value={t.lecture} options={['Normal', 'Grand', 'Très grand']}
+                  onChange={v => setTweak('lecture', v)} />
+      <TweakSection label="Le cadre" />
+      <TweakRadio label="Sur grand écran" value={t.cadre} options={['Téléphone', 'Tablette', 'Plein écran']}
+                  onChange={v => setTweak('cadre', v)} />
+    </TweaksPanel>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('reglages')).render(<MPMReglages />);
 </script>
 <template id="__bundler_thumbnail">
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#1C2B4F"></rect><text x="50" y="62" font-family="Georgia, serif" font-size="44" fill="#D9AE5C" text-anchor="middle">⚜</text></svg>

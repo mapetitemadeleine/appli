@@ -76,9 +76,49 @@
   /* La piste enregistrée d'abord ; à défaut, la voix de synthèse, pour que le
      paquet soit jouable avant que les 101 pistes soient toutes gravées. */
   let encours = null;
+
+  /* Les pistes déjà chargées sont gardées en mémoire : au second clic le son
+     part sans attendre le réseau. */
+  const enmemoire = new Map();
+  /* Le MP3 d'abord : douze fois plus léger que le WAV, donc douze fois plus
+     rapide à partir. Le WAV reste en second, au cas où un nombre n'aurait pas
+     encore été converti. */
+  const PISTES = n => ['app/audio/' + n + '.mp3', 'app/audio/' + n + '.wav',
+                       'audio/nombres/' + n + '.mp3', 'audio/nombres/' + n + '.wav',
+                       'audio/' + n + '.mp3', 'audio/' + n + '.wav'];
+
+  /* Va chercher la piste en tâche de fond, sans la jouer ; descend la liste
+     jusqu'à trouver un fichier qui existe. */
+  function precharge(n) {
+    if (n == null || enmemoire.has(n)) return;
+    const suite = pistes => {
+      if (!pistes.length) return;
+      try {
+        const a = new Audio();
+        a.preload = 'auto';
+        a.volume = 0.8;
+        a.onerror = () => { enmemoire.delete(n); suite(pistes.slice(1)); };
+        a.src = pistes[0];
+        enmemoire.set(n, a);
+        a.load();
+      } catch (e) {}
+    };
+    suite(PISTES(n));
+  }
+
   function dis(n, mot) {
     try { speechSynthesis.cancel(); } catch (e) {}
-    if (encours) { encours.pause(); encours = null; }
+    if (encours) { try { encours.pause(); } catch (e) {} encours = null; }
+    const prete = enmemoire.get(n);
+    if (prete && prete.readyState >= 2) {
+      try {
+        prete.currentTime = 0;
+        encours = prete;
+        const p = prete.play();
+        if (p && p.catch) p.catch(() => {});
+        return;
+      } catch (e) {}
+    }
     const secours = () => {
       try {
         const u = new SpeechSynthesisUtterance(mot);
@@ -92,15 +132,31 @@
       if (!pistes.length) return secours();
       try {
         const a = new Audio(pistes[0]);
+        a.volume = 0.8;
         encours = a;
+        enmemoire.set(n, a);
         a.onerror = () => { if (encours === a) { encours = null; essai(pistes.slice(1)); } };
         const p = a.play();
         if (p && p.catch) p.catch(() => { if (encours === a) { encours = null; essai(pistes.slice(1)); } });
       } catch (e) { secours(); }
     };
-    /* Deux emplacements possibles : GitHub aplatit parfois le dossier au dépôt. */
-    essai(['audio/nombres/' + n + '.wav', 'audio/' + n + '.wav',
-           'audio/nombres/' + n + '.mp3', 'audio/' + n + '.mp3']);
+    /* Les 101 pistes enregistrées vivent dans app/audio/ du dépôt ; les autres
+       emplacements ne sont que des filets de sécurité. */
+    essai(PISTES(n));
+  }
+
+  /* Un chargeur tranquille : il descend la liste des nombres un par un, dès que
+     le navigateur n'a rien de mieux à faire. */
+  function prechargeDoucement(liste) {
+    let i = 0;
+    const pause = window.requestIdleCallback || (f => setTimeout(f, 220));
+    const suite = () => {
+      if (i >= liste.length) return;
+      precharge(liste[i]);
+      i += 1;
+      pause(suite);
+    };
+    pause(suite);
   }
 
   function Medaillon({ couleur }) {
@@ -130,29 +186,8 @@
     );
   }
 
-  function Picto({ actif, onClick, titre, children }) {
-    return (
-      <button type="button" onClick={onClick} title={titre} aria-label={titre} style={{
-        width: 56, height: 56, display: 'grid', placeItems: 'center', borderRadius: 8, cursor: 'pointer',
-        border: '1px solid ' + (actif ? C.or5 : C.ligne), background: actif ? C.or1 : '#FFFFFF', color: C.navy
-      }}>{children}</button>
-    );
-  }
-
-  const OEIL = (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M1.6 12S5.2 5.4 12 5.4 22.4 12 22.4 12 18.8 18.6 12 18.6 1.6 12 1.6 12Z" /><circle cx="12" cy="12" r="3.2" />
-    </svg>
-  );
-  const VOIX = (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3.5 9.5h3l5-4v13l-5-4h-3Z" /><path d="M15.2 9.2a4 4 0 0 1 0 5.6" /><path d="M18 6.6a7.6 7.6 0 0 1 0 10.8" />
-    </svg>
-  );
-
   function Cartes() {
     const [borne, setBorne] = useState(() => { const v = +localStorage.getItem('mpm.cartes.borne'); return v === 20 || v === 69 ? v : 100; });
-    const [mode, setMode] = useState(() => localStorage.getItem('mpm.cartes.mode') === 'ecouter' ? 'ecouter' : 'voir');
     const [melange, setMelange] = useState(true);
     const [pile, setPile] = useState([]);
     const [retournee, setRetournee] = useState(false);
@@ -166,7 +201,7 @@
 
     const n = pile.length ? pile[0] : null;
     const mot = n == null ? '' : ecrire(n);
-    const voir = mode === 'voir';
+    const voir = true;
 
     const battre = useCallback((b, mix) => {
       const q = [];
@@ -176,8 +211,17 @@
       return q;
     }, []);
 
-    useEffect(() => { const q = battre(borne, melange); if (mode === 'ecouter' && q.length) dis(q[0], ecrire(q[0])); }, []);
+    useEffect(() => { battre(borne, melange); }, []);
     useEffect(() => () => clearTimeout(minuteur.current), []);
+
+    /* Les quatre prochaines cartes du défilé sont chargées d'avance. */
+    useEffect(() => { pile.slice(0, 4).forEach(precharge); }, [pile]);
+
+    /* Dans la grille, tout le paquet se charge tranquillement en fond. */
+    useEffect(() => {
+      if (!paquet) return;
+      prechargeDoucement(Array.from({ length: borne + 1 }, (_, i) => i));
+    }, [paquet, borne]);
 
     const retourner = () => {
       setRetournee(r => {
@@ -194,7 +238,6 @@
         setPile(p => {
           const q = p.slice(); const c = q.shift();
           if (dir < 0) q.push(c);
-          if (mode === 'ecouter' && q.length) dis(q[0], ecrire(q[0]));
           return q;
         });
         setRetournee(false); setDx(0); setSortie(0);
@@ -222,11 +265,6 @@
     };
 
     const choisirBorne = b => { setBorne(b); try { localStorage.setItem('mpm.cartes.borne', b); } catch (e) {} battre(b, melange); };
-    const choisirMode = m => {
-      setMode(m); setRetournee(false);
-      try { localStorage.setItem('mpm.cartes.mode', m); } catch (e) {}
-      if (m === 'ecouter' && n != null) dis(n, mot);
-    };
 
     const teinte = n == null ? 'transparent' : famille(n);
     const bord = n == null ? C.ligne : filet(n);
@@ -234,22 +272,23 @@
     if (paquet) {
       return (
         <div style={{ padding: '14px 14px 26px' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
             <Pilule onClick={() => setPaquet(false)}>Revenir au défilé</Pilule>
           </div>
+          <div style={{ fontFamily: BODY, fontSize: 15, color: C.navy3, textAlign: 'center', marginBottom: 14 }}>Touchez une carte pour l’entendre.</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(92px, 1fr))', gap: 10 }}>
             {Array.from({ length: borne + 1 }, (_, i) => i).map(i => {
-              const ouvert = !!ouvertes[i];
               const w = ecrire(i);
+              const dit = ouvertes[i] === 'dit';
               return (
-                <div key={i} onClick={() => setOuvertes(o => ({ ...o, [i]: !ouvert }))}
-                  style={{ aspectRatio: '63 / 88', background: C.ivoire, border: '1px solid ' + filet(i), borderRadius: 4, padding: 3, cursor: 'pointer' }}>
-                  <div style={{ height: '100%', border: '1px solid ' + C.or5, borderRadius: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4, padding: 4, textAlign: 'center', background: famille(i) }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', flexWrap: 'wrap', fontSize: ouvert ? (w.length > 16 ? 13 : 16) : 34, lineHeight: 1, color: C.navy }}>
-                      {glyphes(ouvert ? w : String(i))}
+                <div key={i} onPointerDown={() => { dis(i, w); setOuvertes(o => ({ ...o, [i]: 'dit' })); }} onPointerEnter={() => precharge(i)}
+                  style={{ aspectRatio: '63 / 88', background: C.ivoire, border: '1px solid ' + (dit ? C.or7 : filet(i)), borderRadius: 4, padding: 3, cursor: 'pointer' }}>
+                  <div style={{ height: '100%', border: '1px solid ' + C.or5, borderRadius: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3, padding: 3, textAlign: 'center', background: famille(i) }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', flexWrap: 'wrap', fontSize: 42, lineHeight: 1, color: C.navy }}>
+                      {glyphes(String(i))}
                     </div>
-                    <div style={{ color: C.or5, fontSize: 9 }}>⚜</div>
-                    <div style={{ fontFamily: BODY, fontSize: 12, lineHeight: 1.25, color: C.or7 }}>{ouvert ? String(i) : w}</div>
+                    <div style={{ color: C.or5, fontSize: 10 }}>⚜</div>
+                    <div style={{ fontFamily: BODY, fontSize: 13, lineHeight: 1.12, color: C.or7 }}>{w}</div>
                   </div>
                 </div>
               );
@@ -260,7 +299,7 @@
     }
 
     return (
-      <div style={{ height: '100%', minHeight: 430, boxSizing: 'border-box', padding: '12px 18px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+      <div style={{ height: '100%', minHeight: 360, boxSizing: 'border-box', padding: '12px 18px 14px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
 
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
           <Pilule actif={borne === 20} onClick={() => choisirBorne(20)}>jusqu'à 20</Pilule>
@@ -322,13 +361,8 @@
         </div>
         </div>
 
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <Picto actif={voir} onClick={() => choisirMode('voir')} titre="Je vois le chiffre">{OEIL}</Picto>
-          <Picto actif={!voir} onClick={() => choisirMode('ecouter')} titre="J'écoute la voix">{VOIX}</Picto>
-        </div>
-
         <div style={{ fontFamily: BODY, fontSize: 15, color: C.navy3, textAlign: 'center', maxWidth: 300, textWrap: 'pretty' }}>
-          Touchez pour retourner · à droite si vous l'avez
+          Touchez pour retourner, lire et entendre la prononciation du chiffre· Glissez la carte à droite quand vous avez juste, à gauche pour refaire.
         </div>
 
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>

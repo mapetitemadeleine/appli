@@ -7,7 +7,6 @@ const IVORY = '#FBF6EC', IVORY2 = '#F4EBD8', LINE = '#E6D9BC';
 const NAVY = '#1C2B4F', NAVY5 = '#38507C', NAVY3 = '#7C8CAE', NAVY_CLAIR = '#93A1BF';
 const OR7 = '#8F6518', OR5 = '#B8862B', OR3 = '#D9AE5C', OR1 = '#F3E4C0';
 const VERT_F = '#EDF2E6', VERT_L = '#5B6A4C', VERT_T = '#3D4B30';
-const CLUB_R = '#A8322F';
 const SERIF = "'Cormorant Garamond', Georgia, serif", BODY = "'EB Garamond', Georgia, serif";
 const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 const CHIFFRES = { fontVariantNumeric:'lining-nums', fontFeatureSettings:"'lnum' 1" };
@@ -74,6 +73,21 @@ function BandeauAccueil({ onQuitter }){
   );
 }
 
+/* Un dialogue à deux répliques se lit mieux sur deux lignes : la réponse
+   passe à la ligne, comme au théâtre. */
+function replique(t){
+  return (t || '').replace(/ — « /g, '\n— « ');
+}
+
+/* La ligne au-dessus du titre ne fait qu'environ 24 signes en capitales
+   espacées. Au-delà de 20 signes, le nom du saint occupe la ligne à lui seul :
+   mieux vaut pas de date qu'une date coupée par des points de suspension. */
+const SIGNES_NOTICE = 20;
+function notice(saint, date){
+  const nom = (saint || '').trim();
+  return nom.length > SIGNES_NOTICE ? nom : nom + ' — ' + jourMois(date);
+}
+
 /* ————— Le bandeau bleu : Sortir, le titre, les points ————— */
 function Bandeau({ notice, titre, points, onSortir }){
   return (
@@ -84,7 +98,7 @@ function Bandeau({ notice, titre, points, onSortir }){
         <div style={{ flex:1, minWidth:0, height:38, position:'relative', paddingRight:4 }}>
           <div style={{ position:'absolute', top:0, left:0, right:0, fontFamily:BODY, fontSize:13, lineHeight:1, letterSpacing:'0.14em', textTransform:'uppercase', color:NAVY_CLAIR,
             whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{notice}</div>
-          <div style={{ position:'absolute', bottom:-4, left:0, right:0, fontFamily:SERIF, fontWeight:600, fontSize:21, lineHeight:1, color:IVORY,
+          <div style={{ position:'absolute', bottom:-4, left:0, right:0, fontFamily:SERIF, fontWeight:600, fontSize:20, lineHeight:1, color:IVORY,
             whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{titre}</div>
         </div>
         {points == null
@@ -143,7 +157,7 @@ function Pastille({ enfant, pret = true }){
   );
 }
 
-function Accueil({ onExercices, onCartes }){
+function Accueil({ onExercices, onCartes, onPrononciation }){
   return (
     <div style={{ padding:'14px 18px 26px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
       <Module onClick={onExercices}
@@ -151,8 +165,8 @@ function Accueil({ onExercices, onCartes }){
         titre="Tous les exercices" texte="Quizz variés." />
       <Module onClick={onCartes} icone={<MiniCartes />}
         titre="Le jeu des cartes" texte="Apprendre vite et bien." />
-      <Module icone={<Pastille pret={false} enfant="❦" />}
-        titre="La prononciation" texte="A comme ananas…" />
+      <Module onClick={onPrononciation} icone={<Pastille pret={true} enfant="❦" />}
+        titre="La prononciation" texte="A comme avocat…" />
       <Module icone={<Pastille pret={false} enfant="◆" />}
         titre="Le quizz images" texte="Écoutez l'audio de la prof." />
     </div>
@@ -206,11 +220,11 @@ function MenuExercices({ liste, duJour, onOuvrir }){
 }
 
 /* ————— Le menu des paquets ————— */
-function MenuPaquets({ onNombres }){
+function MenuPaquets({ onNombres, onPrononciation }){
   return (
     <div style={{ padding:'16px 18px 26px', display:'flex', flexDirection:'column', gap:9 }}>
       <Ligne onClick={onNombres} vignette="❦" teinte={TEINTES[3]} titre="Les nombres" sous="101 cartes" />
-      <Ligne vignette="◈" teinte={ETEINT} titre="La prononciation" sous="en préparation" />
+      <Ligne onClick={onPrononciation} vignette="◈" teinte={TEINTES[1]} titre="La prononciation" sous="56 cartes" />
     </div>
   );
 }
@@ -265,7 +279,7 @@ function Question({ item, index, total, onSuivant, onMarquer }){
         </div>
       )}
 
-      <div style={{ fontFamily:SERIF, fontSize:26, lineHeight:1.25, color:NAVY, marginBottom:20, textWrap:'pretty' }}>{item.enonce}</div>
+      <div style={{ fontFamily:SERIF, fontSize:26, lineHeight:1.25, color:NAVY, marginBottom:20, textWrap:'pretty', whiteSpace:'pre-line' }}>{replique(item.enonce)}</div>
 
       <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
         {(item.options || []).map((o,i) => {
@@ -295,18 +309,19 @@ function Question({ item, index, total, onSuivant, onMarquer }){
 
       {valide && item.note && (CLUB
         ? <div style={{ marginTop:14, display:'flex', gap:9 }}>
-            <span style={{ flex:'none', color:CLUB_R, fontSize:12, lineHeight:1.5 }}>⚜</span>
+            <span style={{ flex:'none', color:OR3, fontSize:12, lineHeight:1.5 }}>⚜</span>
             <div style={{ flex:1 }}>
-              <span style={{ fontFamily:BODY, fontSize:12, fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:CLUB_R, marginRight:7 }}>Explications</span>
+              <span style={{ fontFamily:BODY, fontSize:12, fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:OR7, marginRight:7 }}>Le mot du prof</span>
               <span style={{ fontFamily:BODY, fontSize:15, lineHeight:1.5, color:NAVY5, textWrap:'pretty' }}>{item.note}</span>
             </div>
           </div>
-        : <a href={SITE_CLUB} style={{ marginTop:14, display:'flex', gap:9, textDecoration:'none', alignItems:'baseline' }}>
-            <span style={{ flex:'none', color:CLUB_R, fontSize:12 }}>⚜</span>
-            <span style={{ flex:1, fontFamily:BODY, fontSize:14, lineHeight:1.5, color:NAVY3 }}>
-              <span style={{ fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', fontSize:12, color:CLUB_R, marginRight:7 }}>Explications</span>
-              réservées aux membres du Club
+        : <a href={SITE_CLUB} style={{ marginTop:22, display:'flex', gap:10, textDecoration:'none',
+            alignItems:'baseline', justifyContent:'center', textAlign:'center' }}>
+            <span style={{ flex:'none', color:OR3, fontSize:11 }}>⚜</span>
+            <span style={{ fontFamily:BODY, fontStyle:'italic', fontSize:15, lineHeight:1.5, color:NAVY5, textWrap:'balance' }}>
+              Le mot du prof est réservé aux membres du Club.
             </span>
+            <span style={{ flex:'none', color:OR3, fontSize:11 }}>⚜</span>
           </a>)}
     </div>
   );
@@ -358,7 +373,7 @@ function App(){
 
   const ouvrir = id => {
     const e = liste.find(x=>x.id===id);
-    setSession({ id, titre:e.titre, notice:e.saint + ' — ' + jourMois(e.date), items:e.items, i:0, score:0 });
+    setSession({ id, titre:e.titre, notice:notice(e.saint, e.date), items:e.items, i:0, score:0 });
     setFin(null);
   };
   const sortir = () => { setSession(null); setFin(null); setEcran('accueil'); };
@@ -384,19 +399,24 @@ function App(){
     corps = <MenuExercices liste={liste} duJour={duJour} onOuvrir={ouvrir} />;
   } else if (ecran === 'paquets'){
     bandeau = <Bandeau notice="Le jeu des cartes" titre="Les paquets" onSortir={sortir} />;
-    corps = <MenuPaquets onNombres={()=>setEcran('nombres')} />;
+    corps = <MenuPaquets onNombres={()=>setEcran('nombres')} onPrononciation={()=>setEcran('prononciation')} />;
   } else if (ecran === 'nombres'){
     bandeau = <Bandeau notice="De zéro à cent" titre="Les nombres" onSortir={()=>setEcran('paquets')} />;
     corps = <window.Cartes />;
+  } else if (ecran === 'prononciation'){
+    bandeau = <Bandeau notice="Lettres et graphies" titre="La prononciation" onSortir={sortir} />;
+    corps = <window.Prononciation />;
   } else {
     bandeau = <BandeauAccueil onQuitter={()=>{ location.href = 'https://mapetitemadeleine.org/'; }} />;
-    corps = <Accueil onExercices={()=>setEcran('exercices')} onCartes={()=>setEcran('paquets')} />;
+    corps = <Accueil onExercices={()=>setEcran('exercices')} onCartes={()=>setEcran('paquets')}
+      onPrononciation={()=>setEcran('prononciation')} />;
   }
 
   return (
     <div style={{ display:'flex', flexDirection:'column', height:'100%', background:IVORY, fontFamily:BODY }}>
       {bandeau}
-      <div style={{ flex:1, minHeight:0, overflowY:'auto', overflowX:'hidden', background:IVORY, WebkitOverflowScrolling:'touch' }}>{corps}</div>
+      <div style={{ flex:1, minHeight:0, overflowY:'auto', overflowX:'hidden', background:IVORY,
+        WebkitOverflowScrolling:'touch', touchAction:'pan-y', overscrollBehavior:'contain' }}>{corps}</div>
       <div style={{ height:20, background:IVORY, flex:'none' }} />
     </div>
   );

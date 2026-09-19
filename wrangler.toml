@@ -1,5 +1,7 @@
 name = "appli"
 compatibility_date = "2026-09-12"
 
+# Les fichiers sont recopiés dans dist/ par la build command de Cloudflare
+# (tout sauf les dotfiles), pour que .git ne soit jamais vu comme un asset.
 [assets]
 directory = "./dist"
